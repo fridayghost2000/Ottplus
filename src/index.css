@@ -84,10 +84,23 @@
   }
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .animate-float {
   animation: float 4.5s ease-in-out infinite;
 }
 
 .animate-float-delayed {
   animation: float-delayed 5.5s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
 }

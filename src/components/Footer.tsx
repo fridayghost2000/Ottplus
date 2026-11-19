@@ -1,0 +1,237 @@
+import { Play, ArrowUpRight } from 'lucide-react'
+
+export function Footer() {
+  return (
+    <footer id="contact" className="bg-[#181D27] text-white pt-20 pb-12 border-t border-neutral-800">
+      <div className="max-w-[1312px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Brand & Links Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-neutral-800">
+          {/* Brand Info Column (4 Cols) */}
+          <div className="lg:col-span-4 space-y-6 text-left">
+            <a href="#" className="flex items-center gap-2.5 group">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-[#7A5AF8] to-[#9B8AFB] flex items-center justify-center shadow-md shadow-[#7A5AF8]/30">
+                <Play className="h-5 w-5 fill-white text-white translate-x-0.5" />
+              </div>
+              <span className="text-[22px] font-bold tracking-tight text-white font-heading">
+                OTT<span className="text-[#7A5AF8]">Fast</span>
+              </span>
+            </a>
+
+            <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">
+              OTTFast is a comprehensive turnkey video streaming platform empowering broadcasters,
+              enterprises, filmmakers, and digital creators to launch branded video services worldwide.
+            </p>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href="https://facebook.com/ottfastindia"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-[#7A5AF8] hover:text-[#7A5AF8] text-neutral-300 flex items-center justify-center transition-colors text-xs font-bold"
+              >
+                FB
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-[#7A5AF8] hover:text-[#7A5AF8] text-neutral-300 flex items-center justify-center transition-colors text-xs font-bold"
+              >
+                X
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-[#7A5AF8] hover:text-[#7A5AF8] text-neutral-300 flex items-center justify-center transition-colors text-xs font-bold"
+              >
+                IN
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 hover:border-[#7A5AF8] hover:text-[#7A5AF8] text-neutral-300 flex items-center justify-center transition-colors text-xs font-bold"
+              >
+                YT
+              </a>
+            </div>
+          </div>
+
+          {/* Column 1: Solutions (2 Cols) */}
+          <div className="lg:col-span-2 space-y-4 text-left">
+            <div className="text-sm font-bold text-white uppercase tracking-wider font-heading">
+              Solutions
+            </div>
+            <ul className="space-y-2.5 text-sm text-neutral-400">
+              <li>
+                <a href="#services" className="hover:text-white transition-colors">
+                  OTT Platform
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="hover:text-white transition-colors">
+                  Video Hosting &amp; CMS
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="hover:text-white transition-colors">
+                  Custom Media Player
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="hover:text-white transition-colors">
+                  Cloud Transcoding
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="hover:text-white transition-colors">
+                  Live Streaming
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="hover:text-white transition-colors">
+                  Linear FAST Channels
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 2: Industries (2 Cols) */}
+          <div className="lg:col-span-2 space-y-4 text-left">
+            <div className="text-sm font-bold text-white uppercase tracking-wider font-heading">
+              Industries
+            </div>
+            <ul className="space-y-2.5 text-sm text-neutral-400">
+              <li>
+                <a href="#industries" className="hover:text-white transition-colors">
+                  Broadcast &amp; Media
+                </a>
+              </li>
+              <li>
+                <a href="#industries" className="hover:text-white transition-colors">
+                  Education &amp; E-Learning
+                </a>
+              </li>
+              <li>
+                <a href="#industries" className="hover:text-white transition-colors">
+                  Filmmakers &amp; Studios
+                </a>
+              </li>
+              <li>
+                <a href="#industries" className="hover:text-white transition-colors">
+                  Enterprise Video
+                </a>
+              </li>
+              <li>
+                <a href="#industries" className="hover:text-white transition-colors">
+                  Sports &amp; Live Events
+                </a>
+              </li>
+              <li>
+                <a href="#industries" className="hover:text-white transition-colors">
+                  YouTubers &amp; Creators
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Infrastructure (2 Cols) */}
+          <div className="lg:col-span-2 space-y-4 text-left">
+            <div className="text-sm font-bold text-white uppercase tracking-wider font-heading">
+              Infrastructure
+            </div>
+            <ul className="space-y-2.5 text-sm text-neutral-400">
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  IPTV for Hotels
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  IPTV for Operators
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  HbbTV Hybrid Broadcast
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Smart TV Applications
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Studio Multi-DRM
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Global CDN Network
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Company & Support (2 Cols) */}
+          <div className="lg:col-span-2 space-y-4 text-left">
+            <div className="text-sm font-bold text-white uppercase tracking-wider font-heading">
+              Company
+            </div>
+            <ul className="space-y-2.5 text-sm text-neutral-400">
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  About OTTFast
+                </a>
+              </li>
+              <li>
+                <a href="#pricing" className="hover:text-white transition-colors">
+                  Pricing Plans
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="hover:text-white transition-colors">
+                  FAQs &amp; Help
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors flex items-center gap-1">
+                  API Documentation <ArrowUpRight className="w-3 h-3 text-neutral-500" />
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Terms of Service
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar: Copyright & Attribution */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+          <p>© {new Date().getFullYear()} OTTFast. A product of UXDLab. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <a href="#" className="hover:text-neutral-400 transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-neutral-400 transition-colors">
+              Terms of Service
+            </a>
+            <a href="#" className="hover:text-neutral-400 transition-colors">
+              Security &amp; Compliance
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
