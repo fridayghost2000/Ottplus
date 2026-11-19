@@ -13,9 +13,9 @@ export function CTABanner() {
   }
 
   return (
-    <section id="request-demo" className="py-20 sm:py-28 bg-white relative">
+    <section id="request-demo" className="py-20 sm:py-28 bg-[#090D14] relative">
       <div className="max-w-[1312px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl sm:rounded-[36px] bg-[#181D27] text-white p-8 sm:p-14 lg:p-20 overflow-hidden shadow-2xl">
+        <div className="relative rounded-3xl sm:rounded-[36px] bg-gradient-to-br from-[#121624] via-[#0E121D] to-[#0A0D15] border border-white/10 text-white p-8 sm:p-14 lg:p-20 overflow-hidden shadow-[0_30px_90px_rgba(0,0,0,0.8)]">
           {/* Atmospheric background glows */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-[#7A5AF8]/30 via-[#EE46BC]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-t from-[#0BA5EC]/20 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -30,7 +30,7 @@ export function CTABanner() {
           />
 
           <div className="relative z-10 max-w-3xl mx-auto text-center space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[#9B8AFB] text-[13px] font-semibold tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#7A5AF8]/20 border border-white/15 text-[#BDB4FE] text-[13px] font-semibold tracking-wide">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Launch Faster • Stream Worldwide</span>
             </div>

@@ -62,32 +62,32 @@ export function Pricing() {
   ]
 
   return (
-    <section id="pricing" className="py-24 sm:py-32 bg-[#FAFAFC] border-t border-[#E9EAEB]">
+    <section id="pricing" className="py-24 sm:py-32 bg-[#0B0F17] border-t border-white/10">
       <div className="max-w-[1312px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#E9EAEB] text-[#7A5AF8] text-[13px] font-semibold tracking-wide mb-4 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#7A5AF8]/20 border border-white/10 text-[#BDB4FE] text-[13px] font-semibold tracking-wide mb-4 shadow-xs">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Pricing • Value, Built for Scale</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#181D27] font-heading leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-white font-heading leading-tight mb-4">
             Flexible Plans. Clear Value.
           </h2>
 
-          <p className="text-base sm:text-lg text-[#535862] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#94A3B8] leading-relaxed">
             Predictable streaming infrastructure pricing designed to scale as your viewership grows, with zero hidden setup costs.
           </p>
 
           {/* Billing Switcher (matching BrightHub style with 20% off badge) */}
           <div className="flex items-center justify-center gap-3 mt-8">
-            <div className="p-1 rounded-full bg-white border border-[#E9EAEB] shadow-xs flex items-center">
+            <div className="p-1 rounded-full bg-[#111622] border border-white/10 shadow-xs flex items-center">
               <button
                 onClick={() => setIsAnnual(false)}
                 className={`px-5 py-2 rounded-full text-sm font-semibold transition-all cursor-pointer ${
                   !isAnnual
-                    ? 'bg-[#181D27] text-white shadow-xs'
-                    : 'text-[#535862] hover:text-[#181D27]'
+                    ? 'bg-[#7A5AF8] text-white shadow-md'
+                    : 'text-[#94A3B8] hover:text-white'
                 }`}
               >
                 Billed Monthly
@@ -96,12 +96,12 @@ export function Pricing() {
                 onClick={() => setIsAnnual(true)}
                 className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold transition-all cursor-pointer ${
                   isAnnual
-                    ? 'bg-[#181D27] text-white shadow-xs'
-                    : 'text-[#535862] hover:text-[#181D27]'
+                    ? 'bg-[#7A5AF8] text-white shadow-md'
+                    : 'text-[#94A3B8] hover:text-white'
                 }`}
               >
                 <span>Billed Yearly</span>
-                <span className="px-2 py-0.5 rounded-full bg-[#ECFDF3] text-[#12B76A] text-xs font-bold">
+                <span className="px-2 py-0.5 rounded-full bg-[#12B76A]/20 text-[#12B76A] text-xs font-bold">
                   20% Off
                 </span>
               </button>
@@ -118,34 +118,34 @@ export function Pricing() {
                 key={idx}
                 className={`rounded-3xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 relative ${
                   plan.popular
-                    ? 'bg-white border-2 border-[#7A5AF8] shadow-2xl shadow-[#7A5AF8]/10 lg:-translate-y-2'
-                    : 'bg-white border border-[#E9EAEB] shadow-sm hover:border-[#7A5AF8]/40 hover:shadow-lg'
+                    ? 'bg-[#111622] border-2 border-[#7A5AF8] shadow-[0_0_50px_rgba(122,90,248,0.25)] lg:-translate-y-2'
+                    : 'bg-[#111622] border border-white/10 shadow-xl hover:border-[#7A5AF8]/40 hover:shadow-2xl'
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#7A5AF8] text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-md">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#7A5AF8] text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-lg shadow-[#7A5AF8]/40">
                     Most Popular
                   </div>
                 )}
 
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xl font-bold text-[#181D27] font-heading">{plan.name}</span>
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#F4F3FF] text-[#7A5AF8]">
+                    <span className="text-xl font-bold text-white font-heading">{plan.name}</span>
+                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#7A5AF8]/20 text-[#BDB4FE]">
                       {plan.badge}
                     </span>
                   </div>
 
-                  <p className="text-sm text-[#535862] mb-6 leading-relaxed min-h-[44px]">
+                  <p className="text-sm text-[#94A3B8] mb-6 leading-relaxed min-h-[44px]">
                     {plan.description}
                   </p>
 
                   {/* Price */}
-                  <div className="flex items-baseline gap-1.5 pb-6 mb-6 border-b border-[#E9EAEB]">
-                    <span className="text-4xl sm:text-5xl font-black text-[#181D27] font-heading">
+                  <div className="flex items-baseline gap-1.5 pb-6 mb-6 border-b border-white/10">
+                    <span className="text-4xl sm:text-5xl font-black text-white font-heading">
                       ${price}
                     </span>
-                    <span className="text-sm font-semibold text-[#535862]">
+                    <span className="text-sm font-semibold text-[#94A3B8]">
                       / month
                     </span>
                     {isAnnual && (
@@ -157,12 +157,12 @@ export function Pricing() {
 
                   {/* Features List */}
                   <div className="space-y-3.5 mb-8">
-                    <div className="text-xs font-bold uppercase tracking-wider text-[#181D27]">
+                    <div className="text-xs font-bold uppercase tracking-wider text-white">
                       Everything included:
                     </div>
                     {plan.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start gap-3 text-sm text-[#181D27] font-medium">
-                        <div className="w-5 h-5 rounded-full bg-[#ECFDF3] text-[#12B76A] flex items-center justify-center shrink-0 mt-0.5">
+                      <div key={fIdx} className="flex items-start gap-3 text-sm text-white font-medium">
+                        <div className="w-5 h-5 rounded-full bg-[#12B76A]/20 text-[#12B76A] flex items-center justify-center shrink-0 mt-0.5">
                           <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                         </div>
                         <span className="leading-snug">{feat}</span>
@@ -175,8 +175,8 @@ export function Pricing() {
                   href="#request-demo"
                   className={`w-full inline-flex items-center justify-center gap-2 h-12 rounded-full text-[15px] font-semibold transition-all duration-200 cursor-pointer ${
                     plan.popular
-                      ? 'bg-[#7A5AF8] hover:bg-[#6941C6] text-white shadow-lg shadow-[#7A5AF8]/30 hover:shadow-[#7A5AF8]/40'
-                      : 'bg-[#F8F9FC] hover:bg-[#7A5AF8] text-[#181D27] hover:text-white border border-[#E9EAEB]'
+                      ? 'bg-[#7A5AF8] hover:bg-[#6941C6] text-white shadow-lg shadow-[#7A5AF8]/40 hover:scale-[1.02]'
+                      : 'bg-[#161B26] hover:bg-[#7A5AF8] text-white hover:text-white border border-white/10 hover:border-[#7A5AF8]'
                   }`}
                 >
                   <span>{plan.ctaText}</span>

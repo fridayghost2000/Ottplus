@@ -42,29 +42,29 @@ export function FAQ() {
   }
 
   return (
-    <section id="faq" className="py-24 sm:py-32 bg-white relative">
+    <section id="faq" className="py-24 sm:py-32 bg-[#090D14] relative">
       <div className="max-w-[1312px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Heading, Subtitle & Support Button (matching BrightHub) */}
           <div className="lg:col-span-5 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F4F3FF] border border-[#EBE7FB] text-[#7A5AF8] text-[13px] font-semibold tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#7A5AF8]/20 border border-white/10 text-[#BDB4FE] text-[13px] font-semibold tracking-wide">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>Questions • Answers &amp; Guidance</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#181D27] font-heading leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-white font-heading leading-tight">
               Need Help? <br />
               We’ve Got You Covered.
             </h2>
 
-            <p className="text-base sm:text-lg text-[#535862] leading-relaxed">
+            <p className="text-base sm:text-lg text-[#94A3B8] leading-relaxed">
               From automated cloud transcoding and multi-DRM encryption to Smart TV app deployment — here are the answers to your most common streaming questions.
             </p>
 
             <div className="pt-4 flex flex-col sm:flex-row gap-3">
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center gap-2 bg-[#181D27] hover:bg-[#7A5AF8] text-white text-[15px] font-semibold h-12 px-7 rounded-full shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-[#7A5AF8] hover:bg-[#6941C6] text-white text-[15px] font-semibold h-12 px-7 rounded-full shadow-lg shadow-[#7A5AF8]/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer"
               >
                 <span>Talk to an OTT Architect</span>
                 <ArrowRight className="w-4 h-4" />
@@ -81,22 +81,22 @@ export function FAQ() {
                   key={idx}
                   className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                     isOpen
-                      ? 'border-[#7A5AF8]/40 bg-[#F8F9FC] shadow-sm'
-                      : 'border-[#E9EAEB] bg-white hover:border-[#D5D7DA]'
+                      ? 'border-[#7A5AF8]/50 bg-[#161B26] shadow-xl'
+                      : 'border-white/10 bg-[#111622] hover:border-white/20'
                   }`}
                 >
                   <button
                     onClick={() => toggle(idx)}
                     className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
                   >
-                    <span className="text-base sm:text-lg font-bold text-[#181D27] font-heading">
+                    <span className="text-base sm:text-lg font-bold text-white font-heading">
                       {faq.question}
                     </span>
                     <span
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
                         isOpen
                           ? 'bg-[#7A5AF8] text-white'
-                          : 'bg-[#F4F3FF] text-[#7A5AF8]'
+                          : 'bg-[#161B26] text-[#BDB4FE] border border-white/10'
                       }`}
                     >
                       {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
@@ -104,7 +104,7 @@ export function FAQ() {
                   </button>
 
                   {isOpen && (
-                    <div className="px-6 pb-6 text-[15px] text-[#535862] leading-relaxed border-t border-[#E9EAEB]/60 pt-4 animate-in fade-in duration-200 text-left">
+                    <div className="px-6 pb-6 text-[15px] text-[#94A3B8] leading-relaxed border-t border-white/10 pt-4 animate-in fade-in duration-200 text-left">
                       {faq.answer}
                     </div>
                   )}

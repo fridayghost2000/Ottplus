@@ -13,9 +13,9 @@ export function Marquee() {
   ]
 
   return (
-    <section className="py-12 sm:py-16 bg-[#FAFAFC] border-y border-[#E9EAEB] overflow-hidden">
+    <section className="py-12 sm:py-16 bg-[#0B0F17] border-y border-white/10 overflow-hidden">
       <div className="max-w-[1312px] mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
-        <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#535862]">
+        <p className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#94A3B8]">
           Powering Broadcast-Grade Streaming Across Global Devices &amp; Edge Networks
         </p>
       </div>
@@ -26,16 +26,16 @@ export function Marquee() {
           {[...partners, ...partners].map((partner, index) => (
             <div
               key={index}
-              className="flex items-center gap-3 px-6 py-3 rounded-xl bg-white border border-[#E9EAEB] shadow-xs hover:border-[#7A5AF8]/40 hover:shadow-sm transition-all cursor-pointer group shrink-0"
+              className="flex items-center gap-3 px-6 py-3.5 rounded-xl bg-[#111622] border border-white/10 shadow-sm hover:border-[#7A5AF8]/50 hover:bg-[#161B26] transition-all cursor-pointer group shrink-0"
             >
-              <div className="w-8 h-8 rounded-lg bg-[#F4F3FF] group-hover:bg-[#7A5AF8] text-[#7A5AF8] group-hover:text-white flex items-center justify-center font-bold text-xs transition-colors">
+              <div className="w-8 h-8 rounded-lg bg-[#7A5AF8]/20 group-hover:bg-[#7A5AF8] text-[#BDB4FE] group-hover:text-white flex items-center justify-center font-bold text-xs transition-colors">
                 {partner.name.slice(0, 2).toUpperCase()}
               </div>
               <div className="text-left">
-                <div className="text-sm font-bold text-[#181D27] group-hover:text-[#7A5AF8] transition-colors">
+                <div className="text-sm font-bold text-white group-hover:text-[#BDB4FE] transition-colors">
                   {partner.name}
                 </div>
-                <div className="text-[11px] text-[#535862]">
+                <div className="text-[11px] text-[#94A3B8]">
                   {partner.category}
                 </div>
               </div>

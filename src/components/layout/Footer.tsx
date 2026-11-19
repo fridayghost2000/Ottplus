@@ -3,23 +3,21 @@ import { ArrowUpRight } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-[#181D27] text-white pt-20 pb-12 border-t border-neutral-800">
+    <footer id="contact" className="bg-[#05070B] text-white pt-20 pb-12 border-t border-white/10">
       <div className="max-w-[1312px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Brand & Links Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-neutral-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-white/10">
           {/* Brand Info Column (4 Cols) */}
           <div className="lg:col-span-4 space-y-6 text-left">
-            <Link to="/" className="inline-flex items-center group">
-              <div className="bg-white hover:bg-white/90 px-3.5 py-1.5 rounded-xl shadow-md transition-all duration-200 group-hover:scale-105">
-                <img
-                  src="/logo.png"
-                  alt="OTTFast"
-                  className="h-8 w-auto object-contain"
-                />
-              </div>
+            <Link to="/" className="inline-flex items-center group py-1">
+              <img
+                src="/logo-white.png"
+                alt="OTTFast"
+                className="h-9 sm:h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              />
             </Link>
 
-            <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-[#94A3B8] leading-relaxed max-w-sm">
               OTTFast is a comprehensive turnkey video streaming platform empowering broadcasters,
               enterprises, filmmakers, and digital creators to launch branded video services worldwide.
             </p>
