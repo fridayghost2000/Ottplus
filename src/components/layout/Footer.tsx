@@ -9,11 +9,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-white/10">
           {/* Brand Info Column (4 Cols) */}
           <div className="lg:col-span-4 space-y-6 text-left">
-            <Link to="/" className="inline-flex items-center group py-1">
+            <Link to="/" className="inline-flex items-center py-1">
               <img
                 src="/logo-white.png"
                 alt="OTTFast"
-                className="h-9 sm:h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                className="h-9 sm:h-10 w-auto object-contain"
               />
             </Link>
 

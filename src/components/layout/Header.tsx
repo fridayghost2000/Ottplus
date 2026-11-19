@@ -54,11 +54,11 @@ export function Header() {
     >
       <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
         {/* Left: Brand Logo */}
-        <Link to="/" className="flex items-center shrink-0 group cursor-pointer py-1">
+        <Link to="/" className="flex items-center shrink-0 cursor-pointer py-1">
           <img
             src="/logo-white.png"
             alt="OTTFast"
-            className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+            className="h-8 sm:h-9 w-auto object-contain"
           />
         </Link>
 
