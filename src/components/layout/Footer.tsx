@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Play, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -9,13 +9,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-neutral-800">
           {/* Brand Info Column (4 Cols) */}
           <div className="lg:col-span-4 space-y-6 text-left">
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-[#7A5AF8] to-[#9B8AFB] flex items-center justify-center shadow-md shadow-[#7A5AF8]/30">
-                <Play className="h-5 w-5 fill-white text-white translate-x-0.5" />
+            <Link to="/" className="inline-flex items-center group">
+              <div className="bg-white hover:bg-white/90 px-3.5 py-1.5 rounded-xl shadow-md transition-all duration-200 group-hover:scale-105">
+                <img
+                  src="/logo.png"
+                  alt="OTTFast"
+                  className="h-8 w-auto object-contain"
+                />
               </div>
-              <span className="text-[22px] font-bold tracking-tight text-white font-heading">
-                OTT<span className="text-[#7A5AF8]">Fast</span>
-              </span>
             </Link>
 
             <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">

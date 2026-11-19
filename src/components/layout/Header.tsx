@@ -45,18 +45,12 @@ export function Header() {
     >
       <div className="max-w-[1312px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group cursor-pointer">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-[#7A5AF8] to-[#9B8AFB] flex items-center justify-center shadow-md shadow-[#7A5AF8]/30 group-hover:scale-105 transition-transform duration-200">
-            <Play className="h-5 w-5 fill-white text-white translate-x-0.5" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[22px] font-bold tracking-tight text-[#181D27] font-heading leading-none">
-              OTT<span className="text-[#7A5AF8]">Fast</span>
-            </span>
-            <span className="text-[10px] tracking-wider text-[#535862] font-medium uppercase mt-0.5">
-              Streaming Platform
-            </span>
-          </div>
+        <Link to="/" className="flex items-center group cursor-pointer py-1">
+          <img
+            src="/logo.png"
+            alt="OTTFast"
+            className="h-9 sm:h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+          />
         </Link>
 
         {/* Desktop Navigation Links */}
