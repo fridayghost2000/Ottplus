@@ -1,6 +1,5 @@
 import {
   ArrowRight,
-  Play,
   Tv,
   CheckCircle2,
   Activity,
@@ -10,7 +9,8 @@ import {
   Sparkles,
   Zap,
   Volume2,
-  Maximize2
+  Maximize2,
+  Play
 } from 'lucide-react'
 
 export function Hero() {
@@ -68,7 +68,7 @@ export function Hero() {
           </a>
 
           <a
-            href="#services"
+            href="#features"
             className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#F8F9FC] text-[#181D27] hover:text-[#7A5AF8] border border-[#E9EAEB] hover:border-[#D5D7DA] text-[15px] font-semibold h-13 px-7 rounded-full shadow-sm hover:shadow transition-all duration-200 cursor-pointer"
           >
             <Tv className="w-4 h-4 text-[#535862]" />
@@ -104,7 +104,7 @@ export function Hero() {
                 Multi-Screen Delivery
               </div>
               <div className="text-[12px] text-[#535862] mt-0.5">
-                Smart TV, Mobile, Apple TV & Roku
+                Smart TV, Mobile, Apple TV &amp; Roku
               </div>
             </div>
           </div>

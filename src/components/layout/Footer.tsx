@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Play, ArrowUpRight } from 'lucide-react'
 
 export function Footer() {
@@ -8,14 +9,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-neutral-800">
           {/* Brand Info Column (4 Cols) */}
           <div className="lg:col-span-4 space-y-6 text-left">
-            <a href="#" className="flex items-center gap-2.5 group">
+            <Link to="/" className="flex items-center gap-2.5 group">
               <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-[#7A5AF8] to-[#9B8AFB] flex items-center justify-center shadow-md shadow-[#7A5AF8]/30">
                 <Play className="h-5 w-5 fill-white text-white translate-x-0.5" />
               </div>
               <span className="text-[22px] font-bold tracking-tight text-white font-heading">
                 OTT<span className="text-[#7A5AF8]">Fast</span>
               </span>
-            </a>
+            </Link>
 
             <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">
               OTTFast is a comprehensive turnkey video streaming platform empowering broadcasters,
@@ -66,32 +67,32 @@ export function Footer() {
             </div>
             <ul className="space-y-2.5 text-sm text-neutral-400">
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="/#features" className="hover:text-white transition-colors">
                   OTT Platform
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="/#features" className="hover:text-white transition-colors">
                   Video Hosting &amp; CMS
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="/#features" className="hover:text-white transition-colors">
                   Custom Media Player
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="/#features" className="hover:text-white transition-colors">
                   Cloud Transcoding
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="/#features" className="hover:text-white transition-colors">
                   Live Streaming
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="/#features" className="hover:text-white transition-colors">
                   Linear FAST Channels
                 </a>
               </li>
@@ -105,32 +106,32 @@ export function Footer() {
             </div>
             <ul className="space-y-2.5 text-sm text-neutral-400">
               <li>
-                <a href="#industries" className="hover:text-white transition-colors">
+                <a href="/#industries" className="hover:text-white transition-colors">
                   Broadcast &amp; Media
                 </a>
               </li>
               <li>
-                <a href="#industries" className="hover:text-white transition-colors">
+                <a href="/#industries" className="hover:text-white transition-colors">
                   Education &amp; E-Learning
                 </a>
               </li>
               <li>
-                <a href="#industries" className="hover:text-white transition-colors">
+                <a href="/#industries" className="hover:text-white transition-colors">
                   Filmmakers &amp; Studios
                 </a>
               </li>
               <li>
-                <a href="#industries" className="hover:text-white transition-colors">
+                <a href="/#industries" className="hover:text-white transition-colors">
                   Enterprise Video
                 </a>
               </li>
               <li>
-                <a href="#industries" className="hover:text-white transition-colors">
+                <a href="/#industries" className="hover:text-white transition-colors">
                   Sports &amp; Live Events
                 </a>
               </li>
               <li>
-                <a href="#industries" className="hover:text-white transition-colors">
+                <a href="/#industries" className="hover:text-white transition-colors">
                   YouTubers &amp; Creators
                 </a>
               </li>
@@ -144,32 +145,32 @@ export function Footer() {
             </div>
             <ul className="space-y-2.5 text-sm text-neutral-400">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#iptv" className="hover:text-white transition-colors">
                   IPTV for Hotels
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#iptv" className="hover:text-white transition-colors">
                   IPTV for Operators
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#iptv" className="hover:text-white transition-colors">
                   HbbTV Hybrid Broadcast
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#iptv" className="hover:text-white transition-colors">
                   Smart TV Applications
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#features" className="hover:text-white transition-colors">
                   Studio Multi-DRM
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a href="/#features" className="hover:text-white transition-colors">
                   Global CDN Network
                 </a>
               </li>
@@ -183,34 +184,34 @@ export function Footer() {
             </div>
             <ul className="space-y-2.5 text-sm text-neutral-400">
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link to="/" className="hover:text-white transition-colors">
                   About OTTFast
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#pricing" className="hover:text-white transition-colors">
+                <a href="/#pricing" className="hover:text-white transition-colors">
                   Pricing Plans
                 </a>
               </li>
               <li>
-                <a href="#faq" className="hover:text-white transition-colors">
+                <a href="/#faq" className="hover:text-white transition-colors">
                   FAQs &amp; Help
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors flex items-center gap-1">
+                <a href="https://web.archive.org/web/20260113065931/https://ottfast.com/docs-category/docs/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
                   API Documentation <ArrowUpRight className="w-3 h-3 text-neutral-500" />
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link to="/" className="hover:text-white transition-colors">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link to="/" className="hover:text-white transition-colors">
                   Terms of Service
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -220,15 +221,15 @@ export function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
           <p>© {new Date().getFullYear()} OTTFast. A product of UXDLab. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-neutral-400 transition-colors">
+            <Link to="/" className="hover:text-neutral-400 transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-neutral-400 transition-colors">
+            </Link>
+            <Link to="/" className="hover:text-neutral-400 transition-colors">
               Terms of Service
-            </a>
-            <a href="#" className="hover:text-neutral-400 transition-colors">
+            </Link>
+            <Link to="/" className="hover:text-neutral-400 transition-colors">
               Security &amp; Compliance
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -45,7 +45,7 @@ export function IPTVSection() {
   ]
 
   return (
-    <section className="py-24 sm:py-32 bg-[#FAFAFC] border-t border-[#E9EAEB]">
+    <section id="iptv" className="py-24 sm:py-32 bg-[#FAFAFC] border-t border-[#E9EAEB]">
       <div className="max-w-[1312px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#E9EAEB] text-[#7A5AF8] text-[13px] font-semibold tracking-wide mb-4 shadow-xs">
