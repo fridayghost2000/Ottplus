@@ -56,7 +56,7 @@ export function Header() {
         {/* Left: Brand Logo */}
         <Link to="/" className="flex items-center shrink-0 cursor-pointer py-1">
           <img
-            src="/logo-white.png"
+            src="/logo.png"
             alt="OTTFast"
             className="h-8 sm:h-9 w-auto object-contain"
           />

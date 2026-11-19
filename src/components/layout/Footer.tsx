@@ -11,7 +11,7 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-6 text-left">
             <Link to="/" className="inline-flex items-center py-1">
               <img
-                src="/logo-white.png"
+                src="/logo.png"
                 alt="OTTFast"
                 className="h-9 sm:h-10 w-auto object-contain"
               />
