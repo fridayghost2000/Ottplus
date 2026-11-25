@@ -19,6 +19,8 @@ export interface ProductItemData {
   heroHeadline: string
   heroSummary: string
   heroImage: string
+  heroBgImage?: string
+  hideHeroVisual?: boolean
   secondaryImage: string
   homepageSectionHref: string
   homepageSectionLabel: string
@@ -104,8 +106,9 @@ export const PRODUCTS_DATA: ProductItemData[] = [
     heroHeadline: 'Launch Your Own Branded OTT Streaming Platform',
     heroSummary:
       'Deliver top-notch VoD and live content across web, mobile, and Smart TVs under your own brand with full ownership, 150+ built-in features, and cloud or on-premise deployment.',
-    heroImage: '/ottfast-images/ott-platform-5d.jpg',
-    secondaryImage: '/ottfast-images/Group-34.png',
+    heroImage: '/ottfast-images/ott-platform-5d.png',
+    heroBgImage: '/ottfast-images/ott-platform-bg.jpg',
+    secondaryImage: '/ottfast-images/ott-upscale-5d.png',
     homepageSectionHref: '/#platform',
     homepageSectionLabel: 'Explore Platform Overview',
     highlights: [
@@ -147,8 +150,10 @@ export const PRODUCTS_DATA: ProductItemData[] = [
     heroHeadline: 'Professional-Grade Video Hosting & Content Management',
     heroSummary:
       'Manage all your media assets in one centralized dashboard. Upload, store, organize, edit metadata, schedule releases, and track content performance effortlessly.',
-    heroImage: '/ottfast-images/Group-341.png',
-    secondaryImage: '/ottfast-images/Group-24.png',
+    heroImage: '/ottfast-images/cms-hero-bg.jpg',
+    heroBgImage: '/ottfast-images/cms-hero-bg.jpg',
+    hideHeroVisual: true,
+    secondaryImage: '/ottfast-images/cloud-hosting-5d.png',
     homepageSectionHref: '/#platform',
     homepageSectionLabel: 'See CMS & Hosting Tools',
     highlights: [
@@ -276,8 +281,10 @@ export const PRODUCTS_DATA: ProductItemData[] = [
     heroHeadline: 'Live Video Broadcasting & Low-Lag Conferencing',
     heroSummary:
       'Power large-scale live events with PowerStream & Captivate broadcasting tools, or host lag-free personal and business video conferencing with minimal data usage.',
-    heroImage: '/ottfast-images/Group-34.png',
-    secondaryImage: '/ottfast-images/Group-27.png',
+    heroImage: '/ottfast-images/live-broadcast-bg.jpg',
+    heroBgImage: '/ottfast-images/live-broadcast-bg.jpg',
+    hideHeroVisual: true,
+    secondaryImage: '/ottfast-images/live-broadcast-bg.jpg',
     homepageSectionHref: '/#solutions',
     homepageSectionLabel: 'View Live Solutions',
     highlights: [
@@ -321,7 +328,7 @@ export const PRODUCTS_DATA: ProductItemData[] = [
     heroHeadline: 'Custom Web, iOS & Android OTT Applications',
     heroSummary:
       'Reach viewers everywhere with native iOS and Android apps alongside a responsive web streaming portal—complete with offline downloads, push notifications, and in-app billing.',
-    heroImage: '/ottfast-images/ott-platform-5d.jpg',
+    heroImage: '/ottfast-images/ott-platform-5d.png',
     secondaryImage: '/ottfast-images/Group-28.png',
     homepageSectionHref: '/#solutions',
     homepageSectionLabel: 'Explore App Solutions',
@@ -495,8 +502,9 @@ export const PRODUCTS_DATA: ProductItemData[] = [
     heroHeadline: 'Enterprise IPTV Solutions for Every Operator & Venue',
     heroSummary:
       'Deliver reliable, high-definition IP television across managed networks and public internet—purpose-built for Hotels, Content Syndicators, Governments, Broadcast/Satellite, MSOs/ISPs, and Operators.',
-    heroImage: '/ottfast-images/ott-platform-5d.jpg',
-    secondaryImage: '/ottfast-images/Group-34.png',
+    heroImage: '/ottfast-images/ott-platform-5d.png',
+    heroBgImage: '/ottfast-images/ott-platform-bg.jpg',
+    secondaryImage: '/ottfast-images/ott-upscale-5d.png',
     homepageSectionHref: '/#industries',
     homepageSectionLabel: 'Explore Industry Solutions',
     highlights: [
