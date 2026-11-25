@@ -101,7 +101,7 @@ export function ProductUniqueSection({ product }: { product: ProductItemData }) 
     case 'video-hosting-cms':
       return <WorkflowPipelineSection product={product} />
     case 'media-player':
-      return <PlayerStageSection product={product} />
+      return <PlayerStageSection />
     case 'video-transcoding':
       return <AbrLadderSection product={product} />
     case 'live-conferencing':
@@ -247,13 +247,30 @@ function WorkflowPipelineSection({ product }: { product: ProductItemData }) {
   )
 }
 
-function PlayerStageSection({ product }: { product: ProductItemData }) {
+function PlayerStageSection() {
   const [quality, setQuality] = useState<'Auto (ABR)' | '4K UHD' | '1080p' | '720p'>('Auto (ABR)')
   const [audioTrack, setAudioTrack] = useState<'English' | 'Hindi' | 'Spanish'>('English')
 
   return (
-    <section className="w-full py-16 px-4 sm:px-8 border-t border-white/10">
-      <div className="max-w-[1405px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+    <section className="relative w-full py-16 lg:py-24 px-4 sm:px-8 border-t border-white/10 overflow-hidden bg-black">
+      {/* Homepage-matched background effect */}
+      <motion.img
+        src="/figma-assets/s1_blades.png"
+        alt=""
+        animate={{ scale: [1, 1.04, 1], opacity: [0.22, 0.36, 0.22] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 55% at 75% 50%, rgba(45,212,191,0.14), transparent 70%), radial-gradient(ellipse 50% 50% at 30% 25%, rgba(243,193,44,0.06), transparent 65%)',
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/35 to-black pointer-events-none" />
+
+      <div className="relative z-10 max-w-[1405px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         <div className="lg:col-span-7 space-y-6">
           <h2
             className="text-[30px] sm:text-[40px] text-white font-normal"
@@ -318,11 +335,30 @@ function PlayerStageSection({ product }: { product: ProductItemData }) {
         </div>
 
         <div className="lg:col-span-5">
-          <Visual5D
-            src={product.secondaryImage}
-            alt="HLS Player Controls"
-            glowColor="rgba(45, 212, 191, 0.38)"
-          />
+          <div
+            style={{ perspective: '1200px' }}
+            className="relative flex items-center justify-center py-4 select-none"
+          >
+            <motion.div
+              animate={{
+                y: [0, -10, 0],
+                rotateX: [3, -3, 3],
+                rotateY: [-6, 6, -6],
+                scale: [1, 1.03, 1],
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-[0_28px_70px_rgba(45,212,191,0.28)]"
+            >
+              <video
+                src="/videos/bento-yellow.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

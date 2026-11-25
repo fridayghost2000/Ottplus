@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { LiquidMetalButton } from '@/components/ui/liquid-metal-button'
-import { DeviceLogos5D, Visual5D } from '@/components/ui/visual-5d'
+import { DeviceLogos5D, HlsPlayer5D, Visual5D } from '@/components/ui/visual-5d'
 import { CTASection } from '@/pages/Home/components/CTASection'
 import {
   PRODUCT_CATEGORIES,
@@ -73,7 +73,7 @@ export default function ProductsPage() {
         ) : (
           /* Distinct Hero Composition per Product */
           <section className="relative w-full bg-black pt-[104px] sm:pt-[120px] pb-16 lg:pb-24 px-4 sm:px-8 overflow-hidden">
-            {activeProduct.heroBgImage && (
+            {activeProduct.heroBgImage ? (
               <>
                 <motion.img
                   src={activeProduct.heroBgImage}
@@ -84,6 +84,24 @@ export default function ProductsPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black via-black/75 to-transparent pointer-events-none" />
                 <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+              </>
+            ) : (
+              <>
+                {/* Homepage-matched neon curved light pillars arch & warm gold/accent glow */}
+                <motion.img
+                  src="/figma-assets/s1_blades.png"
+                  alt=""
+                  animate={{ scale: [1, 1.04, 1], opacity: [0.28, 0.42, 0.28] }}
+                  transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+                  className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none select-none"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `radial-gradient(ellipse 65% 55% at 50% 20%, rgba(243, 193, 44, 0.08), transparent 65%), radial-gradient(ellipse 55% 50% at 25% 55%, ${theme.glowRgba}, transparent 70%)`,
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black pointer-events-none" />
               </>
             )}
             <div className="relative z-10 max-w-[1405px] mx-auto">
@@ -169,13 +187,17 @@ export default function ProductsPage() {
               {theme.heroLayout === 'split-left' && (
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                   <div className="lg:col-span-6 order-2 lg:order-1">
-                    <Visual5D
-                      src={activeProduct.heroImage}
-                      secondarySrc={activeProduct.secondaryImage}
-                      alt={activeProduct.title}
-                      glowColor={theme.glowRgba}
-                      maxHeightClass="max-h-[430px]"
-                    />
+                    {activeProduct.slug === 'media-player' ? (
+                      <HlsPlayer5D />
+                    ) : (
+                      <Visual5D
+                        src={activeProduct.heroImage}
+                        secondarySrc={activeProduct.secondaryImage}
+                        alt={activeProduct.title}
+                        glowColor={theme.glowRgba}
+                        maxHeightClass="max-h-[430px]"
+                      />
+                    )}
                   </div>
                   <div className="lg:col-span-6 order-1 lg:order-2 space-y-6">
                     <h1

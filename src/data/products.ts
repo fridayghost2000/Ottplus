@@ -195,8 +195,8 @@ export const PRODUCTS_DATA: ProductItemData[] = [
     heroHeadline: 'Buffer-Free HTML5 & HLS Media Player',
     heroSummary:
       'Deliver smooth, adaptive playback across desktops, smartphones, tablets, and Smart TVs with a lightweight, customizable HTML5/HLS player built for zero-lag viewing.',
-    heroImage: '/ottfast-images/Group-342.png',
-    secondaryImage: '/ottfast-images/Group-25.png',
+    heroImage: '/sectors/filmmakers.jpg',
+    secondaryImage: '/ottfast-images/ott-upscale-5d.png',
     homepageSectionHref: '/#features',
     homepageSectionLabel: 'View Player Capabilities',
     highlights: [

@@ -129,6 +129,97 @@ export function Visual5D({
   )
 }
 
+/**
+ * Photorealistic 5D floating HTML5 & HLS Video Player stage with real looping video,
+ * mouse-tracked 3D perspective tilt, and floating glassmorphic player HUD.
+ */
+export function HlsPlayer5D() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [9, -9]), {
+    stiffness: 180,
+    damping: 20,
+  })
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-11, 11]), {
+    stiffness: 180,
+    damping: 20,
+  })
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5)
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  const handleMouseLeave = () => {
+    mouseX.set(0)
+    mouseY.set(0)
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: '1200px' }}
+      className="relative w-full py-4 select-none"
+    >
+      <motion.div
+        animate={{ scale: [1, 1.06, 1], opacity: [0.35, 0.55, 0.35] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute inset-6 rounded-full blur-3xl pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(45, 212, 191, 0.32), transparent 72%)',
+        }}
+      />
+
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+        animate={{ y: [0, -10, 0], scale: [1, 1.02, 1] }}
+        whileHover={{ scale: 1.04 }}
+        transition={{ duration: 4.6, repeat: Infinity, ease: 'easeInOut' }}
+        className="relative z-10 w-full max-w-[560px] mx-auto"
+      >
+        {/* 5D Space-Black Laptop Lid & Screen */}
+        <div
+          style={{ transform: 'translateZ(24px)' }}
+          className="relative rounded-t-[18px] bg-gradient-to-b from-[#2a2d36] via-[#17191f] to-[#0e0f13] p-[9px] sm:p-[11px] border border-white/20 shadow-[0_24px_60px_-15px_rgba(45,212,191,0.32)]"
+        >
+          {/* Top Camera Dot */}
+          <div className="mx-auto mb-1.5 size-1.5 rounded-full bg-[#2e323d] ring-1 ring-white/15" />
+
+          {/* Laptop Display */}
+          <div className="relative aspect-[16/10] w-full rounded-[8px] overflow-hidden bg-black ring-1 ring-white/10">
+            <video
+              src="/videos/bento-green.mp4"
+              poster="/sectors/filmmakers.jpg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            />
+            {/* Subtle Glass Screen Reflection */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.09] pointer-events-none" />
+          </div>
+        </div>
+
+        {/* Laptop Hinge & Lower Metallic Base */}
+        <div
+          style={{ transform: 'translateZ(36px) rotateX(65deg)', transformOrigin: 'top center' }}
+          className="relative mx-auto w-[108%] -ml-[4%] h-6 sm:h-7 rounded-b-[16px] bg-gradient-to-b from-[#343844] via-[#1c1f26] to-[#0a0b0e] border-t border-white/25 shadow-[0_18px_35px_rgba(0,0,0,0.85)]"
+        >
+          {/* Thumb Notch */}
+          <div className="mx-auto w-20 h-1.5 rounded-b-full bg-[#0d0e12] border-x border-b border-white/15" />
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
 interface DeviceLogos5DProps {
   title?: string
   filterNames?: string[]
