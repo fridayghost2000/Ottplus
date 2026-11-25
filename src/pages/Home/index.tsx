@@ -1,50 +1,40 @@
 import { Hero } from './components/Hero'
-import { Marquee } from './components/Marquee'
-import { BentoGrid } from './components/BentoGrid'
-import { Benefits } from './components/Benefits'
-import { GlobalInfrastructure } from './components/GlobalInfrastructure'
-import { Industries } from './components/Industries'
-import { IPTVSection } from './components/IPTVSection'
-import { Testimonials } from './components/Testimonials'
-import { Pricing } from './components/Pricing'
-import { FAQ } from './components/FAQ'
-import { CTABanner } from './components/CTABanner'
+import { PlatformSection } from './components/PlatformSection'
+import { VideoTools } from './components/VideoTools'
+import { Solutions } from './components/Solutions'
+import { BusinessSectors } from './components/BusinessSectors'
+import { FeaturesRow } from './components/FeaturesRow'
+import { SecuritySection } from './components/SecuritySection'
+import { CTASection } from './components/CTASection'
 
 export default function HomePage() {
   return (
-    <>
-      {/* 1. Hero Section with Streaming Operations Dashboard & Floating Badges */}
-      <Hero />
+    <div className="w-full bg-black text-[#faf9f5] overflow-x-hidden">
+      <div className="max-w-[1920px] mx-auto relative">
+        {/* 1. Hero Section: "Your Streaming Empire. From Our Source." */}
+        <Hero />
 
-      {/* 2. Partner & Platform Logo Marquee */}
-      <Marquee />
+        {/* 2. Platform Section: "End-to-end video delivery & monetization platform" */}
+        <PlatformSection />
 
-      {/* 3. Core OTT Capabilities & Infrastructure (Asymmetrical Bento Grid) */}
-      <BentoGrid />
+        {/* 3. Video Tools: "Power up your business with video tools" */}
+        <VideoTools />
 
-      {/* 4. Why Content Owners Choose OTTFast (6-Card Feature Grid) */}
-      <Benefits />
+        {/* 4. Solutions: "Our solutions" Slider */}
+        <Solutions />
 
-      {/* 5. Aceternity UI Global World Map & Edge CDN Infrastructure */}
-      <GlobalInfrastructure />
+        {/* 5. Streaming Solutions for Every Business Sector */}
+        <BusinessSectors />
 
-      {/* 6. Vertical Industry Solutions Showcase */}
-      <Industries />
+        {/* 6. 4-Column Feature Row */}
+        <FeaturesRow />
 
-      {/* 7. Turnkey IPTV, Smart TV & HbbTV Infrastructure */}
-      <IPTVSection />
+        {/* 6. Security: "Stream confidently with enterprise-grade protection." */}
+        <SecuritySection />
 
-      {/* 8. Verified Social Proof & Customer Stories */}
-      <Testimonials />
-
-      {/* 9. Transparent Pricing Plans (with Annual 20% Discount Toggle) */}
-      <Pricing />
-
-      {/* 10. Frequently Asked Questions (2-Column Accordion) */}
-      <FAQ />
-
-      {/* 11. Large Lead Generation CTA Banner */}
-      <CTABanner />
-    </>
+        {/* 7. Engagement CTA: "Ready, set, engage" */}
+        <CTASection />
+      </div>
+    </div>
   )
 }

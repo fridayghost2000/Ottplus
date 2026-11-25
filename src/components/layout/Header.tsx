@@ -1,468 +1,566 @@
-import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 import {
-  Menu,
-  X,
-  ChevronDown,
-  ArrowRight,
-  Tv,
-  Film,
-  Server,
-  Play,
-  Layers,
-  GraduationCap,
-  Clapperboard,
+  BarChart2,
+  BookOpen,
+  Briefcase,
   Building2,
-  Trophy,
+  Cast,
+  ChevronDown,
+  Cpu,
+  Crop,
+  Dumbbell,
+  FolderOpen,
+  GraduationCap,
+  Image as ImageIcon,
+  Lightbulb,
+  Lock,
+  Megaphone,
+  Menu,
+  Minimize2,
+  MonitorPlay,
+  Newspaper,
+  Plug,
+  RefreshCw,
+  ShieldCheck,
+  ShoppingCart,
+  Smartphone,
+  Terminal,
   Users,
-  Search,
-  Bell
+  Video,
+  X,
 } from 'lucide-react'
 
-export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [solutionsDropdown, setSolutionsDropdown] = useState(false)
-  const [industriesDropdown, setIndustriesDropdown] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [showNotification, setShowNotification] = useState(false)
+interface ProductItem {
+  title: string
+  description?: string
+  href: string
+  icon: ReactNode
+}
 
-  const location = useLocation()
+interface ProductSection {
+  heading: string
+  items: ProductItem[]
+}
+
+const ICON_CLASS = 'size-[17px]'
+
+const PRODUCT_SECTIONS: ProductSection[] = [
+  {
+    heading: 'VIDEO',
+    items: [
+      {
+        title: 'Overview',
+        description: 'Simplified video hosting',
+        href: '#platform',
+        icon: <Video className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Video Library',
+        description: 'Easy video management',
+        href: '#platform',
+        icon: <FolderOpen className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Video Protection',
+        description: 'Secure video streaming',
+        href: '#platform',
+        icon: <Lock className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Video Player',
+        description: 'Customization and branding',
+        href: '#platform',
+        icon: <MonitorPlay className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Video Marketing',
+        description: 'Thumbnails & CTAs',
+        href: '#solutions',
+        icon: <Megaphone className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+    ],
+  },
+  {
+    heading: 'IMAGE',
+    items: [
+      {
+        title: 'Overview',
+        description: 'Image optimization',
+        href: '#platform',
+        icon: <ImageIcon className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Image Compression',
+        description: 'Compress image size',
+        href: '#platform',
+        icon: <Minimize2 className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Responsive Resize',
+        description: 'Resize for devices',
+        href: '#platform',
+        icon: <Smartphone className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Format Conversion',
+        description: 'Latest image formats',
+        href: '#platform',
+        icon: <RefreshCw className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Image Operations',
+        description: 'Auto image editing',
+        href: '#platform',
+        icon: <Crop className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Easy Integration',
+        description: 'Setup in no time',
+        href: '#platform',
+        icon: <Plug className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+    ],
+  },
+  {
+    heading: 'VIDEO API',
+    items: [
+      {
+        title: 'Overview',
+        href: '#platform',
+        icon: <Terminal className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Dual DRM',
+        href: '#platform',
+        icon: <ShieldCheck className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Video Transcoding',
+        href: '#platform',
+        icon: <Cpu className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Video Streaming',
+        href: '#platform',
+        icon: <Cast className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Video Analytics',
+        href: '#platform',
+        icon: <BarChart2 className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+    ],
+  },
+]
+
+const SOLUTION_SECTIONS: ProductSection[] = [
+  {
+    heading: 'PROSUMER',
+    items: [
+      {
+        title: 'SMB & Startups',
+        href: '#solutions',
+        icon: <Building2 className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Fitness Creators',
+        href: '#solutions',
+        icon: <Dumbbell className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Course Creators',
+        href: '#solutions',
+        icon: <Megaphone className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+    ],
+  },
+  {
+    heading: 'ENTERPRISE',
+    items: [
+      {
+        title: 'Online Retail',
+        href: '#solutions',
+        icon: <ShoppingCart className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'News & Media',
+        href: '#solutions',
+        icon: <Newspaper className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Consumer Apps',
+        href: '#solutions',
+        icon: <Briefcase className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+    ],
+  },
+]
+
+const RESOURCE_SECTIONS: ProductSection[] = [
+  {
+    heading: '',
+    items: [
+      {
+        title: 'Docs',
+        href: '#resources',
+        icon: <Terminal className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Why OTTFast',
+        href: '#resources',
+        icon: <Lightbulb className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Blog',
+        href: '#resources',
+        icon: <Newspaper className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Learn',
+        href: '#resources',
+        icon: <Megaphone className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Startup Credit Program',
+        href: '#resources',
+        icon: <GraduationCap className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Tutorials',
+        href: '#resources',
+        icon: <Users className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Case Studies',
+        href: '#resources',
+        icon: <BookOpen className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+    ],
+  },
+]
+
+type DesktopMenu = 'products' | 'solutions' | 'resources' | null
+
+export function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeMenu, setActiveMenu] = useState<DesktopMenu>(null)
+  const [mobileExpanded, setMobileExpanded] = useState<DesktopMenu>(null)
+  const headerRef = useRef<HTMLElement>(null)
+  const closeTimerRef = useRef<number | null>(null)
+
+  const openMenu = (menu: Exclude<DesktopMenu, null>) => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+    setActiveMenu(menu)
+  }
+
+  const scheduleCloseMenu = () => {
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+    closeTimerRef.current = window.setTimeout(() => {
+      setActiveMenu(null)
+    }, 120)
+  }
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
+    const handleClickOutside = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setActiveMenu(null)
       }
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setActiveMenu(null)
+        setMobileMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleKeyDown)
+      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+    }
   }, [])
-
-  const isHome = location.pathname === '/' && !location.hash
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#090D14]/95 backdrop-blur-md border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.8)] py-3'
-          : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5 sm:py-6'
-      }`}
+      ref={headerRef}
+      className="fixed top-0 left-0 right-0 z-50 h-[65.1px] bg-[#080808]/80 backdrop-blur-[16.5px] border-b border-[#252833] font-sans"
     >
-      <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-        {/* Left: Brand Logo */}
-        <Link to="/" className="flex items-center shrink-0 cursor-pointer py-1">
+      <div className="relative max-w-[1587.25px] h-full mx-auto px-6 sm:px-12 lg:px-[132.3px] flex items-center justify-between">
+        {/* Left: OTTFast Brand Logo */}
+        <Link to="/" className="flex items-center shrink-0">
           <img
             src="/logo.png"
             alt="OTTFast"
-            className="h-8 sm:h-9 w-auto object-contain"
+            className="h-[38px] w-auto object-contain hover:opacity-95 transition-opacity"
           />
         </Link>
 
-        {/* Center: StreamVibe-Style Dark Capsule Navigation Bar */}
-        <nav className="hidden lg:flex items-center gap-1 p-1.5 bg-[#0F0F12] border border-[#26262B] rounded-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.06),0_8px_20px_rgba(0,0,0,0.4)]">
-          {/* Home Tab */}
-          <Link
-            to="/"
-            className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${
-              isHome
-                ? 'bg-[#1A1A1E] text-white shadow-xs border border-white/10'
-                : 'text-[#94A3B8] hover:text-white hover:bg-white/5'
-            }`}
-          >
-            Home
-          </Link>
-
-          {/* Solutions Dropdown Tab */}
+        {/* Center: Navigation Links matching Figma node 2:1447 */}
+        <nav className="hidden md:flex md:absolute md:left-1/2 md:-translate-x-1/2 items-center gap-[49.6px] text-[14.5px] font-medium text-white tracking-[0px] leading-[24.8px] font-sans">
           <div
-            className="relative"
-            onMouseEnter={() => setSolutionsDropdown(true)}
-            onMouseLeave={() => setSolutionsDropdown(false)}
+            className="relative flex items-center"
+            onMouseEnter={() => openMenu('products')}
+            onMouseLeave={scheduleCloseMenu}
           >
             <button
-              className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
-                solutionsDropdown
-                  ? 'bg-[#1A1A1E] text-white'
-                  : 'text-[#94A3B8] hover:text-white hover:bg-white/5'
-              }`}
+              type="button"
+              onClick={() => setActiveMenu((prev) => (prev === 'products' ? null : 'products'))}
+              aria-expanded={activeMenu === 'products'}
+              className="inline-flex items-center gap-1.5 text-white hover:text-white/80 transition-colors whitespace-nowrap cursor-pointer py-2"
+            >
+              <span>Products</span>
+              <ChevronDown
+                className={`size-3.5 text-white/75 transition-transform duration-200 ${
+                  activeMenu === 'products' ? 'rotate-180 text-[#A48AFB]' : ''
+                }`}
+              />
+            </button>
+          </div>
+
+          <div
+            className="relative flex items-center"
+            onMouseEnter={() => openMenu('solutions')}
+            onMouseLeave={scheduleCloseMenu}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveMenu((prev) => (prev === 'solutions' ? null : 'solutions'))}
+              aria-expanded={activeMenu === 'solutions'}
+              className="inline-flex items-center gap-1.5 text-white hover:text-white/80 transition-colors whitespace-nowrap cursor-pointer py-2"
             >
               <span>Solutions</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  solutionsDropdown ? 'rotate-180 text-[#7A5AF8]' : 'text-[#64748B]'
+                className={`size-3.5 text-white/75 transition-transform duration-200 ${
+                  activeMenu === 'solutions' ? 'rotate-180 text-[#A48AFB]' : ''
                 }`}
               />
             </button>
-
-            {solutionsDropdown && (
-              <div className="absolute top-full left-0 w-80 pt-2 z-50">
-                <div className="bg-[#111622] rounded-2xl p-2.5 shadow-2xl border border-white/10 grid gap-1 animate-in fade-in slide-in-from-top-2 duration-200 backdrop-blur-xl">
-                  <a
-                    href="/#features"
-                    onClick={() => setSolutionsDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <Tv className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">OTT Platform</div>
-                      <div className="text-xs text-[#94A3B8]">VoD &amp; Live streaming infrastructure</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/#features"
-                    onClick={() => setSolutionsDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <Server className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Video Hosting &amp; CMS</div>
-                      <div className="text-xs text-[#94A3B8]">Upload, manage &amp; schedule video assets</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/#features"
-                    onClick={() => setSolutionsDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <Play className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Custom Media Player</div>
-                      <div className="text-xs text-[#94A3B8]">Low-latency adaptive HTML5 player</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/#features"
-                    onClick={() => setSolutionsDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <Layers className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Video Transcoding</div>
-                      <div className="text-xs text-[#94A3B8]">Multi-bitrate cloud encoding</div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* Industries Dropdown Tab */}
+          <a
+            href="#pricing"
+            className="text-white hover:text-white/80 transition-colors whitespace-nowrap"
+          >
+            Pricing
+          </a>
+
           <div
-            className="relative"
-            onMouseEnter={() => setIndustriesDropdown(true)}
-            onMouseLeave={() => setIndustriesDropdown(false)}
+            className="relative flex items-center"
+            onMouseEnter={() => openMenu('resources')}
+            onMouseLeave={scheduleCloseMenu}
           >
             <button
-              className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
-                industriesDropdown
-                  ? 'bg-[#1A1A1E] text-white'
-                  : 'text-[#94A3B8] hover:text-white hover:bg-white/5'
-              }`}
+              type="button"
+              onClick={() => setActiveMenu((prev) => (prev === 'resources' ? null : 'resources'))}
+              aria-expanded={activeMenu === 'resources'}
+              className="inline-flex items-center gap-1.5 text-white hover:text-white/80 transition-colors whitespace-nowrap cursor-pointer py-2"
             >
-              <span>Industries</span>
+              <span>Resources</span>
               <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  industriesDropdown ? 'rotate-180 text-[#7A5AF8]' : 'text-[#64748B]'
+                className={`size-3.5 text-white/75 transition-transform duration-200 ${
+                  activeMenu === 'resources' ? 'rotate-180 text-[#A48AFB]' : ''
                 }`}
               />
             </button>
 
-            {industriesDropdown && (
-              <div className="absolute top-full left-0 w-84 pt-2 z-50">
-                <div className="bg-[#111622] rounded-2xl p-2.5 shadow-2xl border border-white/10 grid gap-1 animate-in fade-in slide-in-from-top-2 duration-200 backdrop-blur-xl">
-                  <a
-                    href="/#industries"
-                    onClick={() => setIndustriesDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <Film className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Broadcast &amp; Media</div>
-                      <div className="text-xs text-[#94A3B8]">Linear TV to Smart TV &amp; mobile apps</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/#industries"
-                    onClick={() => setIndustriesDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <GraduationCap className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Education &amp; E-Learning</div>
-                      <div className="text-xs text-[#94A3B8]">Deliver courses online in a branded app</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/#industries"
-                    onClick={() => setIndustriesDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <Clapperboard className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Filmmakers &amp; Studios</div>
-                      <div className="text-xs text-[#94A3B8]">D2C movie streaming &amp; TVOD ticketing</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/#industries"
-                    onClick={() => setIndustriesDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <Building2 className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Enterprise Streaming</div>
-                      <div className="text-xs text-[#94A3B8]">Secure internal workforce video portals</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/#industries"
-                    onClick={() => setIndustriesDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <Trophy className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Sports &amp; Live Events</div>
-                      <div className="text-xs text-[#94A3B8]">Broadcast live sports tournaments globally</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/#industries"
-                    onClick={() => setIndustriesDropdown(false)}
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-[#7A5AF8]/15 text-[#A48AFB] group-hover:bg-[#7A5AF8] group-hover:text-white transition-colors">
-                      <Users className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-white">Creators &amp; YouTubers</div>
-                      <div className="text-xs text-[#94A3B8]">Build direct fan subscriptions</div>
-                    </div>
-                  </a>
+            {activeMenu === 'resources' && (
+              <div className="hidden md:block absolute left-0 top-full pt-3 w-[270px] z-50">
+                <div className="rounded-2xl bg-[#0b0b0f]/98 backdrop-blur-2xl border border-[#252833] shadow-[0_24px_60px_rgba(0,0,0,0.9)] p-4 space-y-2">
+                  {RESOURCE_SECTIONS[0].items.map((item) => (
+                    <a
+                      key={item.title}
+                      href={item.href}
+                      onClick={() => setActiveMenu(null)}
+                      className="group/item flex items-center gap-3.5 rounded-xl p-2 hover:bg-white/[0.05] transition-colors"
+                    >
+                      <div className="size-9 shrink-0 rounded-[8px] bg-[#16161a] border border-white/[0.08] text-white/75 group-hover/item:bg-[#202026] group-hover/item:border-white/[0.16] group-hover/item:text-white flex items-center justify-center transition-colors duration-150">
+                        {item.icon}
+                      </div>
+                      <span className="text-[14px] font-semibold text-[#faf9f5] group-hover/item:text-white leading-snug">
+                        {item.title}
+                      </span>
+                    </a>
+                  ))}
                 </div>
               </div>
             )}
           </div>
-
-          {/* IPTV Tab */}
-          <a
-            href="/#iptv"
-            className="px-4 py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] hover:text-white hover:bg-white/5 transition-all"
-          >
-            IPTV &amp; Smart TV
-          </a>
-
-          {/* Pricing Tab */}
-          <a
-            href="/#pricing"
-            className="px-4 py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] hover:text-white hover:bg-white/5 transition-all"
-          >
-            Subscriptions
-          </a>
-
-          {/* Support / FAQ Tab */}
-          <a
-            href="/#faq"
-            className="px-4 py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] hover:text-white hover:bg-white/5 transition-all"
-          >
-            Support
-          </a>
         </nav>
 
-        {/* Right: StreamVibe Action Icons (Search, Bell) & Primary CTA */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Search Action Icon */}
-          <div className="relative">
-            <button
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2.5 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-              aria-label="Search Video Solutions"
-            >
-              <Search className="w-5 h-5" />
-            </button>
-
-            {/* Quick Search Popup */}
-            {searchOpen && (
-              <div className="absolute right-0 top-full mt-2 w-72 sm:w-80 bg-[#111622] border border-white/10 rounded-xl p-3 shadow-2xl z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                <div className="flex items-center gap-2 bg-[#161B26] border border-white/10 rounded-lg px-3 py-2">
-                  <Search className="w-4 h-4 text-[#94A3B8]" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search OTT features, DRM, IPTV..."
-                    className="w-full bg-transparent text-xs text-white placeholder:text-[#94A3B8] focus:outline-hidden"
-                    autoFocus
-                  />
-                  {searchQuery && (
-                    <button
-                      onClick={() => setSearchQuery('')}
-                      className="text-xs text-[#94A3B8] hover:text-white"
-                    >
-                      Clear
-                    </button>
-                  )}
-                </div>
-                <div className="mt-2 text-[11px] text-[#94A3B8] flex items-center justify-between px-1">
-                  <span>Popular: VoD, Live, DRM, Smart TV</span>
-                  <button
-                    onClick={() => setSearchOpen(false)}
-                    className="text-[#7A5AF8] hover:underline"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Bell / Notification Icon with Badge */}
-          <div className="relative">
-            <button
-              onClick={() => setShowNotification(!showNotification)}
-              className="p-2.5 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer relative"
-              aria-label="Platform Updates"
-            >
-              <Bell className="w-5 h-5" />
-              {/* Active notification indicator dot */}
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#E50000] border border-[#090D14] animate-pulse" />
-            </button>
-
-            {/* Notification Drawer */}
-            {showNotification && (
-              <div className="absolute right-0 top-full mt-2 w-72 sm:w-80 bg-[#111622] border border-white/10 rounded-xl p-3.5 shadow-2xl z-50 animate-in fade-in slide-in-from-top-2 duration-200 text-left">
-                <div className="flex items-center justify-between pb-2 border-b border-white/10 mb-2.5">
-                  <span className="text-xs font-bold text-white uppercase tracking-wider">
-                    Platform Updates
-                  </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#12B76A]/20 text-[#12B76A] font-semibold">
-                    Live
-                  </span>
-                </div>
-                <div className="space-y-2 text-xs">
-                  <div className="p-2 rounded-lg bg-[#161B26] border border-white/10">
-                    <div className="font-semibold text-white">Apple TV &amp; Roku Fast Engine</div>
-                    <div className="text-[11px] text-[#94A3B8] mt-0.5">
-                      Updated with low-latency LL-HLS 2.0 streaming pipeline.
-                    </div>
-                  </div>
-                  <div className="p-2 rounded-lg bg-[#161B26] border border-white/10">
-                    <div className="font-semibold text-white">Multi-DRM Auto Rotation</div>
-                    <div className="text-[11px] text-[#94A3B8] mt-0.5">
-                      Widevine Modular &amp; FairPlay 4K keys active across all nodes.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Primary Request Demo Action Button */}
-          <a
-            href="/#request-demo"
-            className="hidden sm:inline-flex items-center gap-2 bg-[#7A5AF8] hover:bg-[#6941C6] text-white text-[13px] sm:text-[14px] font-semibold h-10 px-5 rounded-xl shadow-[0_4px_16px_rgba(122,90,248,0.4)] hover:shadow-[0_6px_22px_rgba(122,90,248,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer shrink-0"
-          >
-            <span>Request Demo</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-
-          {/* Mobile Menu Trigger */}
+        {/* Right: Mobile Menu Trigger */}
+        <div className="flex items-center md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-white hover:bg-white/10 transition-colors ml-1"
-            aria-label="Toggle Navigation Menu"
+            className="p-1.5 rounded-lg text-white hover:bg-white/10 transition-colors"
+            aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer (matching StreamVibe dark capsule aesthetics) */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-full bg-[#0A0D14]/98 border-b border-white/10 shadow-2xl px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-300 backdrop-blur-2xl">
-          <div className="flex flex-col gap-2 p-2 bg-[#0F0F12] border border-[#26262B] rounded-2xl text-[15px] font-medium text-white">
-            <Link
-              to="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-4 rounded-xl bg-[#1A1A1E] text-white font-semibold"
-            >
-              Home
-            </Link>
-            <a
-              href="/#features"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-4 rounded-xl text-[#94A3B8] hover:text-white hover:bg-white/5"
-            >
-              Solutions &amp; Services
-            </a>
-            <a
-              href="/#industries"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-4 rounded-xl text-[#94A3B8] hover:text-white hover:bg-white/5"
-            >
-              Industries
-            </a>
-            <a
-              href="/#iptv"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-4 rounded-xl text-[#94A3B8] hover:text-white hover:bg-white/5"
-            >
-              IPTV &amp; Smart TV
-            </a>
-            <a
-              href="/#pricing"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-4 rounded-xl text-[#94A3B8] hover:text-white hover:bg-white/5"
-            >
-              Subscriptions &amp; Pricing
-            </a>
-            <a
-              href="/#faq"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-4 rounded-xl text-[#94A3B8] hover:text-white hover:bg-white/5"
-            >
-              Support &amp; FAQ
-            </a>
-          </div>
+      {/* Desktop Products Mega-Menu Dropdown */}
+      {activeMenu === 'products' && (
+        <div
+          onMouseEnter={() => openMenu('products')}
+          onMouseLeave={scheduleCloseMenu}
+          className="hidden md:block fixed left-1/2 -translate-x-1/2 top-[65.1px] w-[min(94vw,920px)] pt-2 z-50"
+        >
+          <div className="rounded-2xl bg-[#0b0b0f]/98 backdrop-blur-2xl border border-[#252833] shadow-[0_24px_60px_rgba(0,0,0,0.9)] overflow-hidden">
+            {PRODUCT_SECTIONS.map((section, sectionIdx) => (
+              <div
+                key={section.heading}
+                className={`px-8 py-6 ${
+                  sectionIdx < PRODUCT_SECTIONS.length - 1 ? 'border-b border-white/10' : ''
+                }`}
+              >
+                <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#94A3B8] mb-4">
+                  {section.heading}
+                </div>
 
-          <div className="pt-2">
-            <a
-              href="/#request-demo"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full inline-flex items-center justify-center gap-2 bg-[#7A5AF8] hover:bg-[#6941C6] text-white text-[15px] font-semibold h-12 rounded-xl shadow-lg shadow-[#7A5AF8]/40 transition-all cursor-pointer"
-            >
-              <span>Request Demo</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
+                <div className="grid grid-cols-3 gap-x-6 gap-y-5">
+                  {section.items.map((item) => (
+                    <a
+                      key={`${section.heading}-${item.title}`}
+                      href={item.href}
+                      onClick={() => setActiveMenu(null)}
+                      className="group/item flex items-start gap-3.5 rounded-xl p-2 -m-2 hover:bg-white/[0.05] transition-colors"
+                    >
+                      <div className="size-9 shrink-0 rounded-[8px] bg-[#16161a] border border-white/[0.08] text-white/75 group-hover/item:bg-[#202026] group-hover/item:border-white/[0.16] group-hover/item:text-white flex items-center justify-center transition-colors duration-150">
+                        {item.icon}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[14px] font-semibold text-[#faf9f5] group-hover/item:text-white leading-snug">
+                          {item.title}
+                        </div>
+                        {item.description && (
+                          <div className="text-[12.5px] text-[#94A3B8] leading-snug mt-0.5">
+                            {item.description}
+                          </div>
+                        )}
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
+      )}
+
+      {/* Desktop Solutions Dropdown */}
+      {activeMenu === 'solutions' && (
+        <div
+          onMouseEnter={() => openMenu('solutions')}
+          onMouseLeave={scheduleCloseMenu}
+          className="hidden md:block fixed left-1/2 -translate-x-1/2 top-[65.1px] w-[min(94vw,540px)] pt-2 z-50"
+        >
+          <div className="rounded-2xl bg-[#0b0b0f]/98 backdrop-blur-2xl border border-[#252833] shadow-[0_24px_60px_rgba(0,0,0,0.9)] px-8 py-6 grid grid-cols-2 gap-8">
+            {SOLUTION_SECTIONS.map((section) => (
+              <div key={section.heading}>
+                <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#94A3B8] mb-4">
+                  {section.heading}
+                </div>
+                <div className="space-y-4">
+                  {section.items.map((item) => (
+                    <a
+                      key={`${section.heading}-${item.title}`}
+                      href={item.href}
+                      onClick={() => setActiveMenu(null)}
+                      className="group/item flex items-center gap-3.5 rounded-xl p-2 -m-2 hover:bg-white/[0.05] transition-colors"
+                    >
+                      <div className="size-9 shrink-0 rounded-[8px] bg-[#16161a] border border-white/[0.08] text-white/75 group-hover/item:bg-[#202026] group-hover/item:border-white/[0.16] group-hover/item:text-white flex items-center justify-center transition-colors duration-150">
+                        {item.icon}
+                      </div>
+                      <span className="text-[14px] font-semibold text-[#faf9f5] group-hover/item:text-white leading-snug">
+                        {item.title}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-[#080808]/95 backdrop-blur-2xl border-b border-[#252833] px-6 py-4 space-y-3 max-h-[82vh] overflow-y-auto">
+          {[
+            { key: 'products' as const, label: 'Products', sections: PRODUCT_SECTIONS },
+            { key: 'solutions' as const, label: 'Solutions', sections: SOLUTION_SECTIONS },
+            { key: 'resources' as const, label: 'Resources', sections: RESOURCE_SECTIONS },
+          ].map((group) => {
+            const isOpen = mobileExpanded === group.key
+            return (
+              <div key={group.key}>
+                <button
+                  type="button"
+                  onClick={() => setMobileExpanded((prev) => (prev === group.key ? null : group.key))}
+                  className="w-full flex items-center justify-between py-2 text-[15px] font-medium text-white hover:text-[#A48AFB]"
+                >
+                  <span>{group.label}</span>
+                  <ChevronDown
+                    className={`size-4 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-[#A48AFB]' : ''
+                    }`}
+                  />
+                </button>
+
+                {isOpen && (
+                  <div className="mt-2 mb-3 pl-2 space-y-5 border-l border-white/10">
+                    {group.sections.map((section, sIdx) => (
+                      <div key={section.heading || sIdx} className="space-y-2.5 pl-3">
+                        {section.heading && (
+                          <div className="text-[11px] font-bold uppercase tracking-wider text-[#94A3B8]">
+                            {section.heading}
+                          </div>
+                        )}
+                        <div className="space-y-2">
+                          {section.items.map((item) => (
+                            <a
+                              key={`${section.heading}-${item.title}`}
+                              href={item.href}
+                              onClick={() => {
+                                setMobileExpanded(null)
+                                setMobileMenuOpen(false)
+                              }}
+                              className="flex items-center gap-3 py-1.5 text-white/90 hover:text-[#A48AFB]"
+                            >
+                              <span className="size-7 shrink-0 rounded-[6px] bg-[#16161a] border border-white/[0.08] text-white/75 flex items-center justify-center">
+                                {item.icon}
+                              </span>
+                              <div>
+                                <div className="text-[13.5px] font-semibold leading-tight">{item.title}</div>
+                                {item.description && (
+                                  <div className="text-[12px] text-[#94A3B8] leading-tight">
+                                    {item.description}
+                                  </div>
+                                )}
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+          <a
+            href="#pricing"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-[15px] font-medium text-white hover:text-[#A48AFB]"
+          >
+            Pricing
+          </a>
         </div>
       )}
     </header>

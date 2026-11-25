@@ -5,6 +5,7 @@
 @theme inline {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Sora', 'Inter', sans-serif;
+  --font-serif: 'Adamina', Georgia, serif;
 
   --color-border: var(--border);
   --color-input: var(--input);
