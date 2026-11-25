@@ -1,5 +1,7 @@
 export const ROUTES = {
   HOME: '/',
+  PRODUCTS: '/products',
+  PRODUCT_DETAIL: '/products/:slug',
   SOLUTIONS: '/#features',
   INDUSTRIES: '/#industries',
   IPTV: '/#iptv',

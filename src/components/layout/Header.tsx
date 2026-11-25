@@ -8,24 +8,22 @@ import {
   Cast,
   ChevronDown,
   Cpu,
-  Crop,
+  CreditCard,
   Dumbbell,
   FolderOpen,
+  Globe,
   GraduationCap,
-  Image as ImageIcon,
   Lightbulb,
-  Lock,
   Megaphone,
   Menu,
-  Minimize2,
   MonitorPlay,
   Newspaper,
-  Plug,
-  RefreshCw,
+  Radio,
   ShieldCheck,
   ShoppingCart,
   Smartphone,
   Terminal,
+  Tv,
   Users,
   Video,
   X,
@@ -47,108 +45,95 @@ const ICON_CLASS = 'size-[17px]'
 
 const PRODUCT_SECTIONS: ProductSection[] = [
   {
-    heading: 'VIDEO',
+    heading: 'OTT PLATFORM',
     items: [
       {
-        title: 'Overview',
-        description: 'Simplified video hosting',
-        href: '#platform',
+        title: 'White-Label OTT Platform',
+        description: 'Turnkey VoD & live streaming',
+        href: '/products/ott-platform',
         icon: <Video className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'Video Library',
-        description: 'Easy video management',
-        href: '#platform',
+        title: 'Video Hosting & CMS',
+        description: 'Upload, edit, schedule & manage',
+        href: '/products/video-hosting-cms',
         icon: <FolderOpen className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'Video Protection',
-        description: 'Secure video streaming',
-        href: '#platform',
-        icon: <Lock className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-      {
-        title: 'Video Player',
-        description: 'Customization and branding',
-        href: '#platform',
+        title: 'HLS Media Player',
+        description: 'Buffer-free playback across devices',
+        href: '/products/media-player',
         icon: <MonitorPlay className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'Video Marketing',
-        description: 'Thumbnails & CTAs',
-        href: '#solutions',
-        icon: <Megaphone className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-    ],
-  },
-  {
-    heading: 'IMAGE',
-    items: [
-      {
-        title: 'Overview',
-        description: 'Image optimization',
-        href: '#platform',
-        icon: <ImageIcon className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-      {
-        title: 'Image Compression',
-        description: 'Compress image size',
-        href: '#platform',
-        icon: <Minimize2 className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-      {
-        title: 'Responsive Resize',
-        description: 'Resize for devices',
-        href: '#platform',
-        icon: <Smartphone className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-      {
-        title: 'Format Conversion',
-        description: 'Latest image formats',
-        href: '#platform',
-        icon: <RefreshCw className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-      {
-        title: 'Image Operations',
-        description: 'Auto image editing',
-        href: '#platform',
-        icon: <Crop className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-      {
-        title: 'Easy Integration',
-        description: 'Setup in no time',
-        href: '#platform',
-        icon: <Plug className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-    ],
-  },
-  {
-    heading: 'VIDEO API',
-    items: [
-      {
-        title: 'Overview',
-        href: '#platform',
-        icon: <Terminal className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-      {
-        title: 'Dual DRM',
-        href: '#platform',
-        icon: <ShieldCheck className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-      {
         title: 'Video Transcoding',
-        href: '#platform',
+        description: 'Adaptive multi-resolution encoding',
+        href: '/products/video-transcoding',
         icon: <Cpu className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'Video Streaming',
-        href: '#platform',
+        title: 'Live & Conferencing',
+        description: 'Broadcast & low-lag video chats',
+        href: '/products/live-conferencing',
+        icon: <Radio className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+    ],
+  },
+  {
+    heading: 'APPS & TV',
+    items: [
+      {
+        title: 'Web & Mobile Apps',
+        description: 'iOS, Android & web portals',
+        href: '/products/web-mobile-apps',
+        icon: <Smartphone className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Smart TV Apps',
+        description: 'Apple TV, Fire TV, Roku, Tizen & webOS',
+        href: '/products/smart-tv',
+        icon: <Tv className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'HbbTV',
+        description: 'Hybrid Broadcast Broadband TV',
+        href: '/products/hbbtv',
         icon: <Cast className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'Video Analytics',
-        href: '#platform',
+        title: 'Monetization & Payments',
+        description: 'SVOD, TVOD, AVOD & in-app purchases',
+        href: '/products/monetization',
+        icon: <CreditCard className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+    ],
+  },
+  {
+    heading: 'IPTV & INFRASTRUCTURE',
+    items: [
+      {
+        title: 'IPTV Solutions',
+        description: 'Hotels, operators, MSOs, ISPs & gov',
+        href: '/products/iptv',
+        icon: <Building2 className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'DRM & Security',
+        description: 'Enterprise-grade content protection',
+        href: '/products/drm-security',
+        icon: <ShieldCheck className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'AI & Analytics',
+        description: 'Smart recommendations & ROI insights',
+        href: '/products/ai-analytics',
         icon: <BarChart2 className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Global CDN',
+        description: 'Fast, lag-free multi-device delivery',
+        href: '/products/global-cdn',
+        icon: <Globe className={ICON_CLASS} strokeWidth={1.65} />,
       },
     ],
   },
@@ -425,9 +410,9 @@ export function Header() {
 
                 <div className="grid grid-cols-3 gap-x-6 gap-y-5">
                   {section.items.map((item) => (
-                    <a
+                    <Link
                       key={`${section.heading}-${item.title}`}
-                      href={item.href}
+                      to={item.href}
                       onClick={() => setActiveMenu(null)}
                       className="group/item flex items-start gap-3.5 rounded-xl p-2 -m-2 hover:bg-white/[0.05] transition-colors"
                     >
@@ -444,7 +429,7 @@ export function Header() {
                           </div>
                         )}
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -523,29 +508,53 @@ export function Header() {
                           </div>
                         )}
                         <div className="space-y-2">
-                          {section.items.map((item) => (
-                            <a
-                              key={`${section.heading}-${item.title}`}
-                              href={item.href}
-                              onClick={() => {
-                                setMobileExpanded(null)
-                                setMobileMenuOpen(false)
-                              }}
-                              className="flex items-center gap-3 py-1.5 text-white/90 hover:text-[#A48AFB]"
-                            >
-                              <span className="size-7 shrink-0 rounded-[6px] bg-[#16161a] border border-white/[0.08] text-white/75 flex items-center justify-center">
-                                {item.icon}
-                              </span>
-                              <div>
-                                <div className="text-[13.5px] font-semibold leading-tight">{item.title}</div>
-                                {item.description && (
-                                  <div className="text-[12px] text-[#94A3B8] leading-tight">
-                                    {item.description}
-                                  </div>
-                                )}
-                              </div>
-                            </a>
-                          ))}
+                          {section.items.map((item) =>
+                            item.href.startsWith('/') ? (
+                              <Link
+                                key={`${section.heading}-${item.title}`}
+                                to={item.href}
+                                onClick={() => {
+                                  setMobileExpanded(null)
+                                  setMobileMenuOpen(false)
+                                }}
+                                className="flex items-center gap-3 py-1.5 text-white/90 hover:text-[#A48AFB]"
+                              >
+                                <span className="size-7 shrink-0 rounded-[6px] bg-[#16161a] border border-white/[0.08] text-white/75 flex items-center justify-center">
+                                  {item.icon}
+                                </span>
+                                <div>
+                                  <div className="text-[13.5px] font-semibold leading-tight">{item.title}</div>
+                                  {item.description && (
+                                    <div className="text-[12px] text-[#94A3B8] leading-tight">
+                                      {item.description}
+                                    </div>
+                                  )}
+                                </div>
+                              </Link>
+                            ) : (
+                              <a
+                                key={`${section.heading}-${item.title}`}
+                                href={item.href}
+                                onClick={() => {
+                                  setMobileExpanded(null)
+                                  setMobileMenuOpen(false)
+                                }}
+                                className="flex items-center gap-3 py-1.5 text-white/90 hover:text-[#A48AFB]"
+                              >
+                                <span className="size-7 shrink-0 rounded-[6px] bg-[#16161a] border border-white/[0.08] text-white/75 flex items-center justify-center">
+                                  {item.icon}
+                                </span>
+                                <div>
+                                  <div className="text-[13.5px] font-semibold leading-tight">{item.title}</div>
+                                  {item.description && (
+                                    <div className="text-[12px] text-[#94A3B8] leading-tight">
+                                      {item.description}
+                                    </div>
+                                  )}
+                                </div>
+                              </a>
+                            ),
+                          )}
                         </div>
                       </div>
                     ))}
