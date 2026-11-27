@@ -82,31 +82,43 @@ export function Footer() {
               <h4 className="text-[16.5px] font-bold text-[#faf9f5] mb-4">OTTFast for</h4>
               <ul className="space-y-3 text-[15.5px] text-[#8b8a88]">
                 <li><a href="#for" className="hover:text-white transition-colors">Financial Services</a></li>
-                <li><a href="#for" className="hover:text-white transition-colors">Leadership Updates</a></li>
                 <li><a href="#for" className="hover:text-white transition-colors">Live Events</a></li>
                 <li><a href="#for" className="hover:text-white transition-colors">Marketing</a></li>
                 <li><a href="#for" className="hover:text-white transition-colors">Monetizing your Media</a></li>
                 <li><a href="#for" className="hover:text-white transition-colors">Sales</a></li>
-                <li><a href="#for" className="hover:text-white transition-colors">Supporting Employees</a></li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-[16.5px] font-bold text-[#faf9f5] mb-4">Industries</h4>
               <ul className="space-y-3 text-[15.5px] text-[#8b8a88]">
-                <li><a href="#industries" className="hover:text-white transition-colors">Broadcasters</a></li>
-                <li><a href="#industries" className="hover:text-white transition-colors">Healthcare &amp; Pharma</a></li>
-                <li><a href="#industries" className="hover:text-white transition-colors">Media Entertainment</a></li>
-                <li><a href="#industries" className="hover:text-white transition-colors">Media Networks</a></li>
-                <li><a href="#industries" className="hover:text-white transition-colors">Publishers</a></li>
-                <li><a href="#industries" className="hover:text-white transition-colors">Retail</a></li>
-                <li><a href="#industries" className="hover:text-white transition-colors">Tech Companies</a></li>
+                <li><a href="#industries" className="hover:text-white transition-colors">Broadcast &amp; Media</a></li>
+                <li><a href="#industries" className="hover:text-white transition-colors">Education &amp; e-Learning</a></li>
+                <li><a href="#industries" className="hover:text-white transition-colors">Filmmakers</a></li>
+                <li><a href="#industries" className="hover:text-white transition-colors">Enterprise</a></li>
+                <li><a href="#industries" className="hover:text-white transition-colors">Fitness</a></li>
+                <li><a href="#industries" className="hover:text-white transition-colors">Sports</a></li>
+                <li><a href="#industries" className="hover:text-white transition-colors">Religious</a></li>
+                <li><a href="#industries" className="hover:text-white transition-colors">Youtubers</a></li>
               </ul>
             </div>
           </div>
 
-          {/* Column 4: Resources & Learning */}
+          {/* Column 4: Services & Resources */}
           <div className="space-y-8">
+            <div>
+              <h4 className="text-[16.5px] font-bold text-[#faf9f5] mb-4">Services</h4>
+              <ul className="space-y-3 text-[15.5px] text-[#8b8a88]">
+                <li><a href="#solutions" className="hover:text-white transition-colors">SmartTV</a></li>
+                <li><a href="#solutions" className="hover:text-white transition-colors">HbbTV</a></li>
+                <li><a href="#solutions" className="hover:text-white transition-colors">IPTV for Governments</a></li>
+                <li><a href="#solutions" className="hover:text-white transition-colors">IPTV for Broadcast/satellite</a></li>
+                <li><a href="#solutions" className="hover:text-white transition-colors">IPTV for MSOs / ISPs</a></li>
+                <li><a href="#solutions" className="hover:text-white transition-colors">IPTV for Operators</a></li>
+                <li><a href="#solutions" className="hover:text-white transition-colors">IPTV for Content Owners/Syndicators</a></li>
+              </ul>
+            </div>
+
             <div>
               <h4 className="text-[16.5px] font-bold text-[#faf9f5] mb-4">Resources</h4>
               <ul className="space-y-3 text-[15.5px] text-[#8b8a88]">
@@ -114,16 +126,6 @@ export function Footer() {
                 <li><a href="#resources" className="hover:text-white transition-colors">Customer Stories</a></li>
                 <li><a href="#resources" className="hover:text-white transition-colors">Integrations Hub</a></li>
                 <li><a href="#resources" className="hover:text-white transition-colors">CAE Calculator</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-[16.5px] font-bold text-[#faf9f5] mb-4">Learning</h4>
-              <ul className="space-y-3 text-[15.5px] text-[#8b8a88]">
-                <li><a href="#learning" className="hover:text-white transition-colors">OTTFast Academy</a></li>
-                <li><a href="#learning" className="hover:text-white transition-colors">OTTFast Community</a></li>
-                <li><a href="#learning" className="hover:text-white transition-colors">Product Documentation</a></li>
-                <li><a href="#learning" className="hover:text-white transition-colors">Developer Resources</a></li>
               </ul>
             </div>
           </div>

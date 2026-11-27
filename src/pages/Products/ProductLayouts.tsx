@@ -17,20 +17,21 @@ import {
   Tv,
   Zap,
 } from 'lucide-react'
-import { Visual5D, DeviceLogos5D } from '@/components/ui/visual-5d'
+import { Visual5D } from '@/components/ui/visual-5d'
+import { HoverHighlightGrid } from '@/components/ui/hover-highlight'
 import type { ProductItemData } from '@/data/products'
 
 export interface ProductThemeConfig {
   accentHex: string
   glowRgba: string
-  heroLayout: 'split-right' | 'centered' | 'split-left' | 'cinema-wide' | 'stacked-dual'
+  heroLayout: 'centered' | 'split-left'
 }
 
 export const PRODUCT_THEMES: Record<string, ProductThemeConfig> = {
   'ott-platform': {
     accentHex: '#A48AFB',
     glowRgba: 'rgba(164, 138, 251, 0.38)',
-    heroLayout: 'split-right',
+    heroLayout: 'split-left',
   },
   'video-hosting-cms': {
     accentHex: '#38BDF8',
@@ -50,17 +51,17 @@ export const PRODUCT_THEMES: Record<string, ProductThemeConfig> = {
   'live-conferencing': {
     accentHex: '#F43F5E',
     glowRgba: 'rgba(244, 63, 94, 0.38)',
-    heroLayout: 'stacked-dual',
+    heroLayout: 'centered',
   },
   'web-mobile-apps': {
     accentHex: '#60A5FA',
     glowRgba: 'rgba(96, 165, 250, 0.38)',
-    heroLayout: 'split-right',
+    heroLayout: 'split-left',
   },
   'smart-tv': {
     accentHex: '#F97316',
     glowRgba: 'rgba(249, 115, 22, 0.38)',
-    heroLayout: 'cinema-wide',
+    heroLayout: 'centered',
   },
   hbbtv: {
     accentHex: '#C084FC',
@@ -70,12 +71,12 @@ export const PRODUCT_THEMES: Record<string, ProductThemeConfig> = {
   monetization: {
     accentHex: '#4ADE80',
     glowRgba: 'rgba(74, 222, 128, 0.36)',
-    heroLayout: 'split-right',
+    heroLayout: 'split-left',
   },
   iptv: {
     accentHex: '#3B82F6',
     glowRgba: 'rgba(59, 130, 246, 0.38)',
-    heroLayout: 'cinema-wide',
+    heroLayout: 'centered',
   },
   'drm-security': {
     accentHex: '#FB7185',
@@ -85,7 +86,7 @@ export const PRODUCT_THEMES: Record<string, ProductThemeConfig> = {
   'ai-analytics': {
     accentHex: '#818CF8',
     glowRgba: 'rgba(129, 140, 248, 0.38)',
-    heroLayout: 'stacked-dual',
+    heroLayout: 'split-left',
   },
   'global-cdn': {
     accentHex: '#06B6D4',
@@ -147,7 +148,6 @@ function OttPillarsSection({ product }: { product: ProductItemData }) {
   ]
 
   return (
-    <>
       <section className="w-full py-16 px-4 sm:px-8 border-t border-white/10">
         <div className="max-w-[1405px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-5">
@@ -164,23 +164,21 @@ function OttPillarsSection({ product }: { product: ProductItemData }) {
             >
               Build. Grow. Upscale AnyMoment.
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <HoverHighlightGrid className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {pillars.map((p) => (
                 <div
                   key={p.step}
-                  className="rounded-2xl bg-[#0b0b0f] border border-white/10 p-5 space-y-2.5 hover:border-[#A48AFB]/50 transition-colors"
+                  className="rounded-2xl bg-[#111111]/45 border border-white/[0.05] p-5 space-y-2.5 cursor-pointer"
                 >
                   <span className="text-[12px] font-bold text-[#A48AFB]">{p.step}</span>
                   <h3 className="text-[19px] font-semibold text-white">{p.title}</h3>
                   <p className="text-[13.5px] leading-relaxed text-white/70">{p.desc}</p>
                 </div>
               ))}
-            </div>
+            </HoverHighlightGrid>
           </div>
         </div>
       </section>
-      <DeviceLogos5D />
-    </>
   )
 }
 
@@ -195,17 +193,17 @@ function WorkflowPipelineSection({ product }: { product: ProductItemData }) {
   return (
     <section className="w-full py-16 px-4 sm:px-8 border-t border-white/10">
       <div className="max-w-[1405px] mx-auto space-y-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <HoverHighlightGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map((s) => (
             <div
               key={s.title}
-              className="rounded-2xl bg-[#0b0b0f] border border-sky-400/20 p-6 space-y-2 hover:border-sky-400/50 transition-colors"
+              className="rounded-2xl bg-[#111111]/45 border border-white/[0.05] p-6 space-y-2 cursor-pointer"
             >
               <h3 className="text-[17px] font-semibold text-sky-300">{s.title}</h3>
               <p className="text-[14px] text-white/70 leading-relaxed">{s.desc}</p>
             </div>
           ))}
-        </div>
+        </HoverHighlightGrid>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center rounded-3xl bg-[#090c12] border border-white/10 p-6 sm:p-10">
           <div className="lg:col-span-6 space-y-5">
@@ -215,22 +213,22 @@ function WorkflowPipelineSection({ product }: { product: ProductItemData }) {
             >
               Cloud or On-Premise Hosting Flexibility
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="rounded-xl bg-black/50 border border-white/10 p-4 space-y-2">
+            <HoverHighlightGrid className="grid grid-cols-1 sm:grid-cols-2 gap-4" roundedClass="rounded-xl">
+              <div className="rounded-xl bg-[#111111]/45 border border-white/[0.05] p-4 space-y-2 cursor-pointer">
                 <Cloud className="size-5 text-sky-400" />
                 <div className="font-semibold text-white">Managed Cloud</div>
                 <p className="text-[13px] text-white/65">
                   Auto-scaling storage and zero server maintenance for rapid global launches.
                 </p>
               </div>
-              <div className="rounded-xl bg-black/50 border border-white/10 p-4 space-y-2">
+              <div className="rounded-xl bg-[#111111]/45 border border-white/[0.05] p-4 space-y-2 cursor-pointer">
                 <Server className="size-5 text-sky-400" />
                 <div className="font-semibold text-white">On-Premise</div>
                 <p className="text-[13px] text-white/65">
                   Full data sovereignty behind your own firewall for enterprise & government.
                 </p>
               </div>
-            </div>
+            </HoverHighlightGrid>
           </div>
           <div className="lg:col-span-6">
             <Visual5D
@@ -503,7 +501,6 @@ function MobileSyncSection({ product }: { product: ProductItemData }) {
           </div>
         </div>
       </section>
-      <DeviceLogos5D title="Web & Mobile App Targets" filterNames={['Web', 'iOS', 'Android']} />
     </>
   )
 }
@@ -559,10 +556,6 @@ function SmartTvShowcaseSection({ product }: { product: ProductItemData }) {
           </div>
         </div>
       </section>
-      <DeviceLogos5D
-        title="Supported Connected TV Platforms"
-        filterNames={['Android TV', 'Apple TV', 'Fire TV', 'Roku', 'Samsung Tizen', 'LG webOS']}
-      />
     </>
   )
 }

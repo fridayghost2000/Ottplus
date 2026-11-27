@@ -2,6 +2,8 @@ export const ROUTES = {
   HOME: '/',
   PRODUCTS: '/products',
   PRODUCT_DETAIL: '/products/:slug',
+  INDUSTRIES_CATALOG: '/industries',
+  INDUSTRY_DETAIL: '/industries/:slug',
   SOLUTIONS: '/#features',
   INDUSTRIES: '/#industries',
   IPTV: '/#iptv',

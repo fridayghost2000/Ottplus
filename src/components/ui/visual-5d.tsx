@@ -226,7 +226,7 @@ interface DeviceLogos5DProps {
 }
 
 /**
- * Animated 5D brand-colored device ecosystem strip.
+ * Premiercs-inspired continuous horizontal marquee of supported device ecosystems.
  */
 export function DeviceLogos5D({
   title = 'Stream Across Every Screen',
@@ -236,12 +236,15 @@ export function DeviceLogos5D({
     ? DEVICE_LOGOS.filter((d) => filterNames.includes(d.name))
     : DEVICE_LOGOS
 
+  const baseItems = items.length < 6 ? [...items, ...items] : items
+  const marqueeItems = [...baseItems, ...baseItems]
+
   return (
-    <section className="w-full py-12 lg:py-16 px-4 sm:px-8 border-t border-white/10 bg-[#070709]">
+    <section className="w-full py-16 lg:py-24 px-4 sm:px-8 border-t border-white/10 bg-black overflow-hidden">
       <div className="max-w-[1405px] mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-8">
+        <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-14">
           <h2
-            className="text-[28px] sm:text-[36px] text-[#faf9f5] font-normal"
+            className="text-[28px] sm:text-[36px] lg:text-[40px] text-[#faf9f5] font-normal tracking-[-0.02em]"
             style={{ fontFamily: "'Adamina', Georgia, serif" }}
           >
             {title}
@@ -249,70 +252,44 @@ export function DeviceLogos5D({
         </div>
 
         <div
-          className={`grid gap-4 ${
-            items.length <= 6
-              ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6'
-              : 'grid-cols-3 sm:grid-cols-5 lg:grid-cols-9'
-          }`}
-          style={{ perspective: '1000px' }}
+          className="relative w-full overflow-hidden"
+          style={{
+            WebkitMaskImage:
+              'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+            maskImage:
+              'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+          }}
         >
-          {items.map((device, idx) => (
-            <motion.div
-              key={device.name}
-              animate={{ y: [0, -6, 0] }}
-              transition={{
-                duration: 3.6,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: idx * 0.22,
-              }}
-              whileHover={{
-                y: -12,
-                scale: 1.07,
-                rotateX: 10,
-                rotateY: -6,
-                transition: { type: 'spring', stiffness: 320, damping: 18 },
-              }}
-              style={{
-                transformStyle: 'preserve-3d',
-                borderColor: device.border,
-                boxShadow: `0 14px 32px -12px ${device.glow}, inset 0 1px 0 rgba(255,255,255,0.22)`,
-              }}
-              className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#171822] via-[#0e0f15] to-[#08090d] border px-3 py-5 flex flex-col items-center justify-center gap-3 cursor-pointer"
-            >
+          <div className="flex w-max items-center animate-marquee hover:[animation-play-state:paused]">
+            {marqueeItems.map((device, idx) => (
               <div
-                className="absolute inset-0 opacity-25 group-hover:opacity-65 transition-opacity duration-300 pointer-events-none blur-xl"
-                style={{
-                  background: `radial-gradient(circle at 50% 35%, ${device.glow}, transparent 72%)`,
-                }}
-              />
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-              <div
-                className="relative z-10 w-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                style={{ filter: `drop-shadow(0 4px 12px ${device.glow})` }}
+                key={`${device.name}-${idx}`}
+                className="group flex flex-col items-center justify-center gap-3 px-8 sm:px-12 lg:px-14 py-2 shrink-0 cursor-pointer select-none"
               >
-                <div
-                  role="img"
-                  aria-label={device.name}
-                  className="h-8 w-20"
-                  style={{
-                    background: device.gradient,
-                    WebkitMaskImage: `url(${device.src})`,
-                    WebkitMaskRepeat: 'no-repeat',
-                    WebkitMaskPosition: 'center',
-                    WebkitMaskSize: 'contain',
-                    maskImage: `url(${device.src})`,
-                    maskRepeat: 'no-repeat',
-                    maskPosition: 'center',
-                    maskSize: 'contain',
-                  }}
-                />
+                <div className="relative flex items-center justify-center transition-all duration-300 opacity-55 grayscale brightness-125 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105">
+                  <div
+                    role="img"
+                    aria-label={device.name}
+                    className="h-9 w-24"
+                    style={{
+                      background: device.gradient,
+                      WebkitMaskImage: `url(${device.src})`,
+                      WebkitMaskRepeat: 'no-repeat',
+                      WebkitMaskPosition: 'center',
+                      WebkitMaskSize: 'contain',
+                      maskImage: `url(${device.src})`,
+                      maskRepeat: 'no-repeat',
+                      maskPosition: 'center',
+                      maskSize: 'contain',
+                    }}
+                  />
+                </div>
+                <span className="text-[12px] font-normal tracking-wide text-white/45 group-hover:text-white/90 text-center leading-tight transition-colors duration-300">
+                  {device.name}
+                </span>
               </div>
-              <span className="relative z-10 text-[12px] font-medium text-white/85 group-hover:text-white text-center leading-tight transition-colors">
-                {device.name}
-              </span>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

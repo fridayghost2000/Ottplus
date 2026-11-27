@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { LiquidMetalButton } from '@/components/ui/liquid-metal-button'
+import { HoverHighlightGrid } from '@/components/ui/hover-highlight'
 import { DeviceLogos5D, HlsPlayer5D, Visual5D } from '@/components/ui/visual-5d'
 import { CTASection } from '@/pages/Home/components/CTASection'
 import {
@@ -32,8 +33,8 @@ export default function ProductsPage() {
       <div className="max-w-[1920px] mx-auto relative">
         {/* Catalog Overview Hero */}
         {isCatalogView ? (
-          <section className="relative w-full bg-black pt-[104px] sm:pt-[120px] pb-16 lg:pb-24 px-4 sm:px-8">
-            <div className="max-w-[1405px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <section className="relative w-full bg-black min-h-[520px] sm:min-h-[600px] lg:min-h-[680px] flex items-center pt-[120px] sm:pt-[140px] pb-20 lg:pb-28 px-4 sm:px-8">
+            <div className="w-full max-w-[1405px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
               <div className="lg:col-span-6 space-y-6">
                 <h1
                   className="text-[38px] sm:text-[52px] lg:text-[62px] leading-[1.12] tracking-[-1.8px] text-[#faf9f5] font-normal"
@@ -65,14 +66,14 @@ export default function ProductsPage() {
                   src="/ottfast-images/ott-platform-5d.png"
                   alt="OTTFast All-in-One OTT Suite"
                   glowColor="rgba(164, 138, 251, 0.38)"
-                  maxHeightClass="max-h-[440px]"
+                  maxHeightClass="max-h-[480px]"
                 />
               </div>
             </div>
           </section>
         ) : (
           /* Distinct Hero Composition per Product */
-          <section className="relative w-full bg-black pt-[104px] sm:pt-[120px] pb-16 lg:pb-24 px-4 sm:px-8 overflow-hidden">
+          <section className="relative w-full bg-black min-h-[520px] sm:min-h-[600px] lg:min-h-[680px] flex items-center pt-[120px] sm:pt-[140px] pb-20 lg:pb-28 px-4 sm:px-8 overflow-hidden">
             {activeProduct.heroBgImage ? (
               <>
                 <motion.img
@@ -104,13 +105,9 @@ export default function ProductsPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black pointer-events-none" />
               </>
             )}
-            <div className="relative z-10 max-w-[1405px] mx-auto">
+            <div className="relative z-10 w-full max-w-[1405px] mx-auto">
               {theme.heroLayout === 'centered' && (
-                <div
-                  className={`max-w-4xl mx-auto text-center space-y-6 ${
-                    activeProduct.hideHeroVisual ? 'py-10 sm:py-16 lg:py-24' : ''
-                  }`}
-                >
+                <div className="max-w-4xl mx-auto text-center space-y-6 py-10 sm:py-16 lg:py-24">
                   <h1
                     className="text-[38px] sm:text-[52px] lg:text-[62px] leading-[1.12] tracking-[-1.8px] text-[#faf9f5] font-normal"
                     style={{ fontFamily: "'Adamina', Georgia, serif" }}
@@ -133,54 +130,6 @@ export default function ProductsPage() {
                       <ArrowRight className="size-4" style={{ color: theme.accentHex }} />
                     </Link>
                   </div>
-                  {!activeProduct.hideHeroVisual && (
-                    <div className="pt-8">
-                      <Visual5D
-                        src={activeProduct.heroImage}
-                        secondarySrc={activeProduct.secondaryImage}
-                        alt={activeProduct.title}
-                        glowColor={theme.glowRgba}
-                        maxHeightClass="max-h-[420px]"
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {theme.heroLayout === 'cinema-wide' && (
-                <div className="space-y-10">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-                    <h1
-                      className="lg:col-span-7 text-[38px] sm:text-[52px] lg:text-[62px] leading-[1.1] tracking-[-1.8px] text-[#faf9f5] font-normal"
-                      style={{ fontFamily: "'Adamina', Georgia, serif" }}
-                    >
-                      {activeProduct.heroHeadline}
-                    </h1>
-                    <div className="lg:col-span-5 space-y-5">
-                      <p className="text-[16px] sm:text-[17.5px] leading-[26px] text-[rgba(250,249,245,0.72)]">
-                        {activeProduct.heroSummary}
-                      </p>
-                      <div className="flex flex-wrap items-center gap-4">
-                        <LiquidMetalButton
-                          label="Request Demo"
-                          onClick={() => navigate('/#contact')}
-                        />
-                        <Link
-                          to={activeProduct.homepageSectionHref}
-                          className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] text-[14px] font-medium text-white transition-colors"
-                        >
-                          <span>{activeProduct.homepageSectionLabel}</span>
-                          <ArrowRight className="size-4" style={{ color: theme.accentHex }} />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <Visual5D
-                    src={activeProduct.heroImage}
-                    alt={activeProduct.title}
-                    glowColor={theme.glowRgba}
-                    maxHeightClass="max-h-[460px]"
-                  />
                 </div>
               )}
 
@@ -225,67 +174,6 @@ export default function ProductsPage() {
                   </div>
                 </div>
               )}
-
-              {(theme.heroLayout === 'split-right' || theme.heroLayout === 'stacked-dual') && (
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-                  <div className="lg:col-span-6 space-y-6">
-                    <h1
-                      className="text-[38px] sm:text-[52px] lg:text-[60px] leading-[1.12] tracking-[-1.8px] text-[#faf9f5] font-normal"
-                      style={{ fontFamily: "'Adamina', Georgia, serif" }}
-                    >
-                      {activeProduct.heroHeadline}
-                    </h1>
-                    <p className="text-[16px] sm:text-[18px] leading-[27px] text-[rgba(250,249,245,0.72)] max-w-xl">
-                      {activeProduct.heroSummary}
-                    </p>
-                    <div className="flex flex-wrap items-center gap-4 pt-2">
-                      <LiquidMetalButton
-                        label="Request Demo"
-                        onClick={() => navigate('/#contact')}
-                      />
-                      <Link
-                        to={activeProduct.homepageSectionHref}
-                        className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] text-[14px] font-medium text-white transition-colors"
-                      >
-                        <span>{activeProduct.homepageSectionLabel}</span>
-                        <ArrowRight className="size-4" style={{ color: theme.accentHex }} />
-                      </Link>
-                    </div>
-                    {theme.heroLayout === 'stacked-dual' && (
-                      <div className="grid grid-cols-2 gap-3 pt-2">
-                        {activeProduct.specs.slice(0, 2).map((s) => (
-                          <div
-                            key={s.label}
-                            className="rounded-xl bg-[#0b0b0f] border border-white/10 px-4 py-3"
-                          >
-                            <div className="text-[11px] uppercase tracking-wider text-white/50">
-                              {s.label}
-                            </div>
-                            <div className="text-[15px] font-semibold text-white mt-0.5">
-                              {s.value}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  {!activeProduct.hideHeroVisual && (
-                    <div className="lg:col-span-6">
-                      <Visual5D
-                        src={activeProduct.heroImage}
-                        secondarySrc={
-                          theme.heroLayout === 'stacked-dual'
-                            ? activeProduct.secondaryImage
-                            : undefined
-                        }
-                        alt={activeProduct.title}
-                        glowColor={theme.glowRgba}
-                        maxHeightClass="max-h-[440px]"
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
             </div>
           </section>
         )}
@@ -297,11 +185,11 @@ export default function ProductsPage() {
         {!isCatalogView && (
           <section className="w-full py-14 lg:py-20 px-4 sm:px-8 border-t border-white/10">
             <div className="max-w-[1405px] mx-auto space-y-10">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <HoverHighlightGrid className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {activeProduct.specs.map((spec) => (
                   <div
                     key={spec.label}
-                    className="rounded-2xl bg-[#0b0b0f] border border-[#252833] p-5"
+                    className="rounded-2xl bg-[#111111]/45 border border-white/[0.05] p-5 cursor-pointer"
                   >
                     <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#94A3B8]">
                       {spec.label}
@@ -311,13 +199,13 @@ export default function ProductsPage() {
                     </div>
                   </div>
                 ))}
-              </div>
+              </HoverHighlightGrid>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <HoverHighlightGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {activeProduct.highlights.map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-2xl bg-[#0d0d12] border border-white/10 hover:border-white/25 transition-colors p-6 space-y-3"
+                    className="rounded-2xl bg-[#111111]/45 border border-white/[0.05] p-6 space-y-3 cursor-pointer"
                   >
                     <div
                       className="size-9 rounded-lg bg-[#16161a] border border-white/10 flex items-center justify-center"
@@ -331,13 +219,13 @@ export default function ProductsPage() {
                     </p>
                   </div>
                 ))}
-              </div>
+              </HoverHighlightGrid>
             </div>
           </section>
         )}
 
-        {/* 5D Device Strip on Catalog View */}
-        {isCatalogView && <DeviceLogos5D />}
+        {/* 5D Device Strip (Stream Across Every Screen) */}
+        <DeviceLogos5D />
 
         {/* Product Catalog / Related Products */}
         <section className="w-full py-16 lg:py-24 px-4 sm:px-8 border-t border-white/10">
@@ -372,7 +260,7 @@ export default function ProductsPage() {
                     <h3 className="text-[12px] font-bold uppercase tracking-[0.12em] text-[#94A3B8] border-b border-white/10 pb-3">
                       {cat.label}
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <HoverHighlightGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                       {PRODUCTS_DATA.filter((p) => p.category === cat.key).map((product) => {
                         const cardTheme =
                           PRODUCT_THEMES[product.slug] ?? PRODUCT_THEMES['ott-platform']
@@ -380,7 +268,7 @@ export default function ProductsPage() {
                           <Link
                             key={product.slug}
                             to={`/products/${product.slug}`}
-                            className="group rounded-2xl bg-[#0b0b0f] border border-[#252833] hover:border-[#A48AFB]/50 p-6 flex flex-col justify-between gap-5 transition-colors"
+                            className="group rounded-2xl bg-[#111111]/45 border border-white/[0.05] p-6 flex flex-col justify-between gap-5 transition-colors"
                           >
                             <div className="space-y-4">
                               <Visual5D
@@ -402,12 +290,12 @@ export default function ProductsPage() {
                           </Link>
                         )
                       })}
-                    </div>
+                    </HoverHighlightGrid>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <HoverHighlightGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {relatedProducts.map((product) => {
                   const cardTheme =
                     PRODUCT_THEMES[product.slug] ?? PRODUCT_THEMES['ott-platform']
@@ -415,7 +303,7 @@ export default function ProductsPage() {
                     <Link
                       key={product.slug}
                       to={`/products/${product.slug}`}
-                      className="group rounded-2xl bg-[#0b0b0f] border border-[#252833] hover:border-[#A48AFB]/50 p-6 flex flex-col justify-between gap-4 transition-colors"
+                      className="group rounded-2xl bg-[#111111]/45 border border-white/[0.05] p-6 flex flex-col justify-between gap-4 transition-colors"
                     >
                       <div className="space-y-3">
                         <Visual5D
@@ -438,7 +326,7 @@ export default function ProductsPage() {
                     </Link>
                   )
                 })}
-              </div>
+              </HoverHighlightGrid>
             )}
           </div>
         </section>

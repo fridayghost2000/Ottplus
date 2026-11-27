@@ -1,18 +1,20 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   BarChart2,
   BookOpen,
-  Briefcase,
   Building2,
   Cast,
   ChevronDown,
   Cpu,
   CreditCard,
   Dumbbell,
+  Film,
   FolderOpen,
   Globe,
   GraduationCap,
+  Landmark,
   Lightbulb,
   Megaphone,
   Menu,
@@ -20,9 +22,9 @@ import {
   Newspaper,
   Radio,
   ShieldCheck,
-  ShoppingCart,
   Smartphone,
   Terminal,
+  Trophy,
   Tv,
   Users,
   Video,
@@ -139,44 +141,49 @@ const PRODUCT_SECTIONS: ProductSection[] = [
   },
 ]
 
-const SOLUTION_SECTIONS: ProductSection[] = [
+const INDUSTRY_SECTIONS: ProductSection[] = [
   {
-    heading: 'PROSUMER',
+    heading: 'INDUSTRIES',
     items: [
       {
-        title: 'SMB & Startups',
-        href: '#solutions',
+        title: 'Broadcast & Media',
+        href: '/industries/broadcast-media',
+        icon: <Tv className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Education & e-Learning',
+        href: '/industries/education-e-learning',
+        icon: <GraduationCap className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Filmmakers',
+        href: '/industries/filmmakers',
+        icon: <Film className={ICON_CLASS} strokeWidth={1.65} />,
+      },
+      {
+        title: 'Enterprise',
+        href: '/industries/enterprise',
         icon: <Building2 className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'Fitness Creators',
-        href: '#solutions',
+        title: 'Fitness',
+        href: '/industries/fitness',
         icon: <Dumbbell className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'Course Creators',
-        href: '#solutions',
-        icon: <Megaphone className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-    ],
-  },
-  {
-    heading: 'ENTERPRISE',
-    items: [
-      {
-        title: 'Online Retail',
-        href: '#solutions',
-        icon: <ShoppingCart className={ICON_CLASS} strokeWidth={1.65} />,
+        title: 'Sports',
+        href: '/industries/sports',
+        icon: <Trophy className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'News & Media',
-        href: '#solutions',
-        icon: <Newspaper className={ICON_CLASS} strokeWidth={1.65} />,
+        title: 'Religious',
+        href: '/industries/religious',
+        icon: <Landmark className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'Consumer Apps',
-        href: '#solutions',
-        icon: <Briefcase className={ICON_CLASS} strokeWidth={1.65} />,
+        title: 'Creators',
+        href: '/industries/youtubers',
+        icon: <Video className={ICON_CLASS} strokeWidth={1.65} />,
       },
     ],
   },
@@ -207,11 +214,6 @@ const RESOURCE_SECTIONS: ProductSection[] = [
         icon: <Megaphone className={ICON_CLASS} strokeWidth={1.65} />,
       },
       {
-        title: 'Startup Credit Program',
-        href: '#resources',
-        icon: <GraduationCap className={ICON_CLASS} strokeWidth={1.65} />,
-      },
-      {
         title: 'Tutorials',
         href: '#resources',
         icon: <Users className={ICON_CLASS} strokeWidth={1.65} />,
@@ -225,20 +227,29 @@ const RESOURCE_SECTIONS: ProductSection[] = [
   },
 ]
 
-type DesktopMenu = 'products' | 'solutions' | 'resources' | null
+type DesktopMenu = 'products' | 'industries' | 'resources' | null
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeMenu, setActiveMenu] = useState<DesktopMenu>(null)
   const [mobileExpanded, setMobileExpanded] = useState<DesktopMenu>(null)
+  const [resourcesLeft, setResourcesLeft] = useState<number>(0)
   const headerRef = useRef<HTMLElement>(null)
+  const resourcesTriggerRef = useRef<HTMLDivElement>(null)
   const closeTimerRef = useRef<number | null>(null)
+
+  const syncResourcesPosition = () => {
+    if (resourcesTriggerRef.current) {
+      setResourcesLeft(Math.round(resourcesTriggerRef.current.getBoundingClientRect().left))
+    }
+  }
 
   const openMenu = (menu: Exclude<DesktopMenu, null>) => {
     if (closeTimerRef.current) {
       window.clearTimeout(closeTimerRef.current)
       closeTimerRef.current = null
     }
+    if (menu === 'resources') syncResourcesPosition()
     setActiveMenu(menu)
   }
 
@@ -246,7 +257,7 @@ export function Header() {
     if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
     closeTimerRef.current = window.setTimeout(() => {
       setActiveMenu(null)
-    }, 120)
+    }, 180)
   }
 
   useEffect(() => {
@@ -263,9 +274,11 @@ export function Header() {
     }
     document.addEventListener('mousedown', handleClickOutside)
     document.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('resize', syncResourcesPosition)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('resize', syncResourcesPosition)
       if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
     }
   }, [])
@@ -309,19 +322,19 @@ export function Header() {
 
           <div
             className="relative flex items-center"
-            onMouseEnter={() => openMenu('solutions')}
+            onMouseEnter={() => openMenu('industries')}
             onMouseLeave={scheduleCloseMenu}
           >
             <button
               type="button"
-              onClick={() => setActiveMenu((prev) => (prev === 'solutions' ? null : 'solutions'))}
-              aria-expanded={activeMenu === 'solutions'}
+              onClick={() => setActiveMenu((prev) => (prev === 'industries' ? null : 'industries'))}
+              aria-expanded={activeMenu === 'industries'}
               className="inline-flex items-center gap-1.5 text-white hover:text-white/80 transition-colors whitespace-nowrap cursor-pointer py-2"
             >
-              <span>Solutions</span>
+              <span>Industries</span>
               <ChevronDown
                 className={`size-3.5 text-white/75 transition-transform duration-200 ${
-                  activeMenu === 'solutions' ? 'rotate-180 text-[#A48AFB]' : ''
+                  activeMenu === 'industries' ? 'rotate-180 text-[#A48AFB]' : ''
                 }`}
               />
             </button>
@@ -335,13 +348,17 @@ export function Header() {
           </a>
 
           <div
+            ref={resourcesTriggerRef}
             className="relative flex items-center"
             onMouseEnter={() => openMenu('resources')}
             onMouseLeave={scheduleCloseMenu}
           >
             <button
               type="button"
-              onClick={() => setActiveMenu((prev) => (prev === 'resources' ? null : 'resources'))}
+              onClick={() => {
+                syncResourcesPosition()
+                setActiveMenu((prev) => (prev === 'resources' ? null : 'resources'))
+              }}
               aria-expanded={activeMenu === 'resources'}
               className="inline-flex items-center gap-1.5 text-white hover:text-white/80 transition-colors whitespace-nowrap cursor-pointer py-2"
             >
@@ -352,30 +369,33 @@ export function Header() {
                 }`}
               />
             </button>
-
-            {activeMenu === 'resources' && (
-              <div className="hidden md:block absolute left-0 top-full pt-3 w-[270px] z-50">
-                <div className="rounded-2xl bg-[#0b0b0f]/98 backdrop-blur-2xl border border-[#252833] shadow-[0_24px_60px_rgba(0,0,0,0.9)] p-4 space-y-2">
-                  {RESOURCE_SECTIONS[0].items.map((item) => (
-                    <a
-                      key={item.title}
-                      href={item.href}
-                      onClick={() => setActiveMenu(null)}
-                      className="group/item flex items-center gap-3.5 rounded-xl p-2 hover:bg-white/[0.05] transition-colors"
-                    >
-                      <div className="size-9 shrink-0 rounded-[8px] bg-[#16161a] border border-white/[0.08] text-white/75 group-hover/item:bg-[#202026] group-hover/item:border-white/[0.16] group-hover/item:text-white flex items-center justify-center transition-colors duration-150">
-                        {item.icon}
-                      </div>
-                      <span className="text-[14px] font-semibold text-[#faf9f5] group-hover/item:text-white leading-snug">
-                        {item.title}
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </nav>
+
+        {/* Right: Project-Themed Action Buttons (Desktop) */}
+        <div className="hidden md:flex items-center gap-3.5 shrink-0">
+          <Link
+            to="/#contact"
+            className="px-4 py-1.5 rounded-full border border-white/20 bg-white/[0.04] hover:bg-white/[0.1] hover:border-white/35 text-white text-[13.5px] font-medium transition-all whitespace-nowrap"
+          >
+            Get a demo
+          </Link>
+          <Link
+            to="/#contact"
+            className="text-[13.5px] font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap px-2 py-1.5"
+          >
+            Login
+          </Link>
+          <Link
+            to="/#contact"
+            style={{
+              backgroundImage: 'linear-gradient(155deg, #4B0082 0%, #6D00B8 48%, #9B00FF 100%)',
+            }}
+            className="px-4 py-1.5 rounded-full border border-[#B84DFF]/40 text-white text-[13.5px] font-medium shadow-[0_0_20px_rgba(155,0,255,0.38)] hover:brightness-110 transition-all whitespace-nowrap"
+          >
+            Signup
+          </Link>
+        </div>
 
         {/* Right: Mobile Menu Trigger */}
         <div className="flex items-center md:hidden">
@@ -389,97 +409,187 @@ export function Header() {
         </div>
       </div>
 
-      {/* Desktop Products Mega-Menu Dropdown */}
-      {activeMenu === 'products' && (
-        <div
-          onMouseEnter={() => openMenu('products')}
-          onMouseLeave={scheduleCloseMenu}
-          className="hidden md:block fixed left-1/2 -translate-x-1/2 top-[65.1px] w-[min(94vw,920px)] pt-2 z-50"
-        >
-          <div className="rounded-2xl bg-[#0b0b0f]/98 backdrop-blur-2xl border border-[#252833] shadow-[0_24px_60px_rgba(0,0,0,0.9)] overflow-hidden">
-            {PRODUCT_SECTIONS.map((section, sectionIdx) => (
+      {/* Desktop Full-Width Brightcove-Style Mega-Menu */}
+      <AnimatePresence>
+        {activeMenu && (
+          <>
+            {/* Subtle page dim backdrop */}
+            <motion.div
+              key="mega-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              onClick={() => setActiveMenu(null)}
+              className="hidden md:block fixed inset-0 top-[65.1px] bg-black/50 backdrop-blur-[2px] z-40"
+            />
+
+            <motion.div
+              key="mega-panel"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
+              onMouseEnter={() => openMenu(activeMenu)}
+              onMouseLeave={scheduleCloseMenu}
+              style={
+                activeMenu === 'resources' && resourcesLeft > 0
+                  ? { left: `${Math.max(16, resourcesLeft - 24)}px` }
+                  : undefined
+              }
+              className={
+                activeMenu === 'resources'
+                  ? 'hidden md:block fixed top-[65.1px] w-max min-w-[210px] z-50'
+                  : 'hidden md:block fixed left-0 right-0 top-[65.1px] w-full z-50'
+              }
+            >
               <div
-                key={section.heading}
-                className={`px-8 py-6 ${
-                  sectionIdx < PRODUCT_SECTIONS.length - 1 ? 'border-b border-white/10' : ''
-                }`}
+                className={
+                  activeMenu === 'resources'
+                    ? 'relative w-max min-w-[210px] bg-[#0b0b0d]/98 backdrop-blur-2xl border border-white/[0.08] rounded-b-[18px] rounded-t-[12px] shadow-[0_32px_90px_rgba(0,0,0,0.92)] overflow-hidden'
+                    : 'relative w-full bg-[#0b0b0d]/98 backdrop-blur-2xl border-t border-b border-white/[0.08] rounded-t-[20px] shadow-[0_32px_90px_rgba(0,0,0,0.92)] overflow-hidden'
+                }
               >
-                <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#94A3B8] mb-4">
-                  {section.heading}
-                </div>
+                {/* Subtle Brightcove-style warm ambient radial glow */}
+                <div
+                  className="absolute inset-0 pointer-events-none opacity-60"
+                  style={{
+                    background:
+                      'radial-gradient(ellipse 55% 80% at 55% 45%, rgba(164, 138, 251, 0.07), transparent 70%), radial-gradient(ellipse 40% 60% at 25% 20%, rgba(255, 255, 255, 0.03), transparent 70%)',
+                  }}
+                />
 
-                <div className="grid grid-cols-3 gap-x-6 gap-y-5">
-                  {section.items.map((item) => (
-                    <Link
-                      key={`${section.heading}-${item.title}`}
-                      to={item.href}
-                      onClick={() => setActiveMenu(null)}
-                      className="group/item flex items-start gap-3.5 rounded-xl p-2 -m-2 hover:bg-white/[0.05] transition-colors"
-                    >
-                      <div className="size-9 shrink-0 rounded-[8px] bg-[#16161a] border border-white/[0.08] text-white/75 group-hover/item:bg-[#202026] group-hover/item:border-white/[0.16] group-hover/item:text-white flex items-center justify-center transition-colors duration-150">
-                        {item.icon}
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-[14px] font-semibold text-[#faf9f5] group-hover/item:text-white leading-snug">
-                          {item.title}
-                        </div>
-                        {item.description && (
-                          <div className="text-[12.5px] text-[#94A3B8] leading-snug mt-0.5">
-                            {item.description}
+                <div
+                  className={
+                    activeMenu === 'resources'
+                      ? 'relative px-7 py-7'
+                      : 'relative max-w-[1320px] mx-auto px-8 lg:px-16 py-11 lg:py-14'
+                  }
+                >
+                  <AnimatePresence mode="wait">
+                    {activeMenu === 'products' && (
+                      <motion.div
+                        key="products-content"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+                        className="grid grid-cols-3 gap-12 lg:gap-20"
+                      >
+                        {PRODUCT_SECTIONS.map((section) => (
+                          <div key={section.heading}>
+                            <div className="text-[13px] font-normal text-white/45 mb-6 tracking-[0.01em]">
+                              {section.heading}
+                            </div>
+                            <ul className="space-y-4">
+                              {section.items.map((item, idx) => (
+                                <motion.li
+                                  key={`${section.heading}-${item.title}`}
+                                  initial={{ opacity: 0, y: 4 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{
+                                    duration: 0.24,
+                                    delay: idx * 0.018,
+                                    ease: [0.16, 1, 0.3, 1],
+                                  }}
+                                >
+                                  <Link
+                                    to={item.href}
+                                    onClick={() => setActiveMenu(null)}
+                                    className="inline-block text-[16.5px] lg:text-[17.5px] font-normal tracking-[-0.01em] text-white/90 hover:text-[#A48AFB] hover:translate-x-1 transition-all duration-200 ease-out leading-snug"
+                                  >
+                                    {item.title}
+                                  </Link>
+                                </motion.li>
+                              ))}
+                            </ul>
                           </div>
-                        )}
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+                        ))}
+                      </motion.div>
+                    )}
 
-      {/* Desktop Solutions Dropdown */}
-      {activeMenu === 'solutions' && (
-        <div
-          onMouseEnter={() => openMenu('solutions')}
-          onMouseLeave={scheduleCloseMenu}
-          className="hidden md:block fixed left-1/2 -translate-x-1/2 top-[65.1px] w-[min(94vw,540px)] pt-2 z-50"
-        >
-          <div className="rounded-2xl bg-[#0b0b0f]/98 backdrop-blur-2xl border border-[#252833] shadow-[0_24px_60px_rgba(0,0,0,0.9)] px-8 py-6 grid grid-cols-2 gap-8">
-            {SOLUTION_SECTIONS.map((section) => (
-              <div key={section.heading}>
-                <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#94A3B8] mb-4">
-                  {section.heading}
-                </div>
-                <div className="space-y-4">
-                  {section.items.map((item) => (
-                    <a
-                      key={`${section.heading}-${item.title}`}
-                      href={item.href}
-                      onClick={() => setActiveMenu(null)}
-                      className="group/item flex items-center gap-3.5 rounded-xl p-2 -m-2 hover:bg-white/[0.05] transition-colors"
-                    >
-                      <div className="size-9 shrink-0 rounded-[8px] bg-[#16161a] border border-white/[0.08] text-white/75 group-hover/item:bg-[#202026] group-hover/item:border-white/[0.16] group-hover/item:text-white flex items-center justify-center transition-colors duration-150">
-                        {item.icon}
-                      </div>
-                      <span className="text-[14px] font-semibold text-[#faf9f5] group-hover/item:text-white leading-snug">
-                        {item.title}
-                      </span>
-                    </a>
-                  ))}
+                    {activeMenu === 'industries' && (
+                      <motion.div
+                        key="industries-content"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <div className="text-[13px] font-normal text-white/45 mb-6 tracking-[0.01em]">
+                          {INDUSTRY_SECTIONS[0].heading}
+                        </div>
+                        <div className="grid grid-cols-3 gap-x-12 lg:gap-x-20 gap-y-5 max-w-[980px]">
+                          {INDUSTRY_SECTIONS[0].items.map((item, idx) => (
+                            <motion.div
+                              key={item.title}
+                              initial={{ opacity: 0, y: 4 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{
+                                duration: 0.24,
+                                delay: idx * 0.018,
+                                ease: [0.16, 1, 0.3, 1],
+                              }}
+                            >
+                              <Link
+                                to={item.href}
+                                onClick={() => setActiveMenu(null)}
+                                className="inline-block text-[16.5px] lg:text-[17.5px] font-normal tracking-[-0.01em] text-white/90 hover:text-[#A48AFB] hover:translate-x-1 transition-all duration-200 ease-out leading-snug"
+                              >
+                                {item.title}
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {activeMenu === 'resources' && (
+                      <motion.div
+                        key="resources-content"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <ul className="space-y-4">
+                          {RESOURCE_SECTIONS[0].items.map((item, idx) => (
+                            <motion.li
+                              key={item.title}
+                              initial={{ opacity: 0, y: 4 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{
+                                duration: 0.24,
+                                delay: idx * 0.018,
+                                ease: [0.16, 1, 0.3, 1],
+                              }}
+                            >
+                              <a
+                                href={item.href}
+                                onClick={() => setActiveMenu(null)}
+                                className="inline-block text-[16.5px] lg:text-[17.5px] font-normal tracking-[-0.01em] text-white/90 hover:text-[#A48AFB] hover:translate-x-1 transition-all duration-200 ease-out leading-snug"
+                              >
+                                {item.title}
+                              </a>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#080808]/95 backdrop-blur-2xl border-b border-[#252833] px-6 py-4 space-y-3 max-h-[82vh] overflow-y-auto">
           {[
             { key: 'products' as const, label: 'Products', sections: PRODUCT_SECTIONS },
-            { key: 'solutions' as const, label: 'Solutions', sections: SOLUTION_SECTIONS },
+            { key: 'industries' as const, label: 'Industries', sections: INDUSTRY_SECTIONS },
             { key: 'resources' as const, label: 'Resources', sections: RESOURCE_SECTIONS },
           ].map((group) => {
             const isOpen = mobileExpanded === group.key
@@ -570,6 +680,33 @@ export function Header() {
           >
             Pricing
           </a>
+
+          <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5">
+            <Link
+              to="/#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center px-4 py-2.5 rounded-full border border-white/20 bg-white/[0.04] hover:bg-white/[0.1] text-white text-[14px] font-medium transition-all"
+            >
+              Get a demo
+            </Link>
+            <Link
+              to="/#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-2 text-[14px] font-medium text-white/80 hover:text-white transition-colors"
+            >
+              Login
+            </Link>
+            <Link
+              to="/#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              style={{
+                backgroundImage: 'linear-gradient(155deg, #4B0082 0%, #6D00B8 48%, #9B00FF 100%)',
+              }}
+              className="w-full text-center px-4 py-2.5 rounded-full border border-[#B84DFF]/40 text-white text-[14px] font-medium shadow-[0_0_20px_rgba(155,0,255,0.38)] hover:brightness-110 transition-all"
+            >
+              Signup
+            </Link>
+          </div>
         </div>
       )}
     </header>

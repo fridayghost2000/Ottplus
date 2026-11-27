@@ -1,4 +1,8 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 interface SectorItem {
+  label: string
   title: string
   description: string
   image: string
@@ -8,66 +12,76 @@ interface SectorItem {
 const SECTOR_ROWS: SectorItem[][] = [
   [
     {
+      label: 'Broadcasters',
       title: 'OTTFAST FOR BROADCASTERS',
       description:
         'PowerStream and Captivate feature powerful live video broadcasting software for all audiences.',
       image: '/sectors/broadcasters.jpg',
-      href: '#contact',
+      href: '/industries/broadcast-media',
     },
     {
+      label: 'Education',
       title: 'OTTFAST FOR EDUCATION',
       description:
         'Educate and Motivate! Bring Your Video Courses Online In an App!',
       image: '/sectors/education.jpg',
-      href: '#contact',
+      href: '/industries/education-e-learning',
     },
     {
+      label: 'Filmmakers',
       title: 'OTTFAST FOR FILMMAKERS',
       description:
         'Create Your Own Personalized Movie Streaming Platform to Make Unlimited Revenue through Videos...',
       image: '/sectors/filmmakers.jpg',
-      href: '#contact',
+      href: '/industries/filmmakers',
     },
     {
+      label: 'Enterprise',
       title: 'OTTFAST FOR ENTERPRISE',
       description:
         'Engage your corporate workforce with a business streaming platform for live and on-demand video',
       image: '/sectors/enterprise.jpg',
-      href: '#contact',
+      href: '/industries/enterprise',
     },
   ],
   [
     {
+      label: 'Fitness',
       title: 'OTTFAST FOR FITNESS',
       description:
         'Procure 5X More Money by Streaming and Selling Fitness Courses',
       image: '/sectors/fitness.jpg',
-      href: '#contact',
+      href: '/industries/fitness',
     },
     {
+      label: 'Sports',
       title: 'OTTFAST FOR SPORTS',
       description:
         'Sports events can be broadcast using OTT sports streaming software for live and on-demand viewing.',
       image: '/sectors/sports.jpg',
-      href: '#contact',
+      href: '/industries/sports',
     },
     {
+      label: 'Religious',
       title: 'OTTFAST FOR RELIGIOUS',
       description:
         'Connect & Involve Your Communities With Live & On-Demand Religious Streaming Platform',
       image: '/sectors/religious.jpg',
-      href: '#contact',
+      href: '/industries/religious',
     },
     {
-      title: 'OTTFAST FOR YOUTUBERS',
+      label: 'Creators',
+      title: 'OTTFAST FOR CREATORS',
       description: 'Think outside of YouTube! Create 5x More Revenue',
-      image: '/sectors/youtubers.jpg',
-      href: '#contact',
+      image: '/sectors/creators.jpg',
+      href: '/industries/youtubers',
     },
   ],
 ]
 
 export function BusinessSectors() {
+  const [hoveredRowCard, setHoveredRowCard] = useState<[number, number] | null>(null)
+
   return (
     <section id="industries" className="relative w-full bg-black py-20 lg:py-24 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,38 +103,64 @@ export function BusinessSectors() {
           {SECTOR_ROWS.map((row, rowIdx) => (
             <div
               key={rowIdx}
+              onMouseLeave={() => setHoveredRowCard(null)}
               className="flex flex-col md:flex-row w-full md:h-[400px] overflow-hidden rounded-[12px] border border-white/10"
             >
-              {row.map((sector) => (
-                <a
-                  key={sector.title}
-                  href={sector.href}
-                  className="group relative flex-1 md:hover:flex-[3] md:focus-visible:flex-[3] min-h-[240px] md:min-h-0 overflow-hidden transition-[flex] duration-400 ease-out border-b md:border-b-0 md:border-r last:border-b-0 last:border-r-0 border-white/10"
-                >
-                  {/* 4K Local Image from ottfast.com */}
-                  <img
-                    src={sector.image}
-                    alt={sector.title}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
-                  />
+              {row.map((sector, cardIdx) => {
+                const isRowHovered = hoveredRowCard?.[0] === rowIdx
+                const isCardHovered = isRowHovered && hoveredRowCard?.[1] === cardIdx
+                return (
+                  <Link
+                    key={sector.title}
+                    to={sector.href}
+                    onMouseEnter={() => setHoveredRowCard([rowIdx, cardIdx])}
+                    className="group relative flex-1 md:hover:flex-[3] md:focus-visible:flex-[3] min-h-[240px] md:min-h-0 overflow-hidden transition-[flex] duration-400 ease-out border-b md:border-b-0 md:border-r last:border-b-0 last:border-r-0 border-white/10"
+                  >
+                    {/* 4K Local Image from ottfast.com */}
+                    <img
+                      src={sector.image}
+                      alt={sector.title}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+                    />
 
-                  {/* Overlay (darkens on hover for crisp white text) */}
-                  <div className="absolute inset-0 bg-black/30 md:bg-black/20 group-hover:bg-black/60 transition-colors duration-300" />
+                    {/* Overlay (darkens on hover for crisp white text) */}
+                    <div className="absolute inset-0 bg-black/30 md:bg-black/20 group-hover:bg-black/60 transition-colors duration-300" />
 
-                  {/* Centered Overlay Text matching Elementor transition: all .3s .3s */}
-                  <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6 py-8">
-                    <div className="max-w-md opacity-100 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:group-focus-visible:opacity-100 md:group-focus-visible:translate-y-0 transition-all duration-300 md:delay-300">
-                      <h3 className="text-[18px] sm:text-[20px] font-bold text-white tracking-tight uppercase mb-2.5">
-                        {sector.title}
-                      </h3>
-                      <p className="text-[14px] sm:text-[15px] leading-relaxed text-white/90">
-                        {sector.description}
-                      </p>
+                    {/* Bottom Sector Heading (visible by default, hidden across the whole row when any card in that row is hovered) */}
+                    <div
+                      className={`hidden md:flex absolute inset-x-0 bottom-0 z-10 items-end px-5 pb-4 pt-12 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none transition-opacity duration-200 ${
+                        isRowHovered ? 'opacity-0' : 'opacity-100'
+                      }`}
+                    >
+                      <span
+                        className="text-[20px] font-bold tracking-[-0.02em] text-white drop-shadow-sm"
+                        style={{ fontFamily: 'var(--font-heading)' }}
+                      >
+                        {sector.label}
+                      </span>
                     </div>
-                  </div>
-                </a>
-              ))}
+
+                    {/* Centered Overlay Text: instant fade-out on leave, smooth delayed reveal on hover */}
+                    <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-6 py-8">
+                      <div
+                        className={`max-w-md transition-all ${
+                          isCardHovered
+                            ? 'opacity-100 translate-y-0 duration-300 delay-200'
+                            : 'opacity-100 md:opacity-0 md:translate-y-3 duration-100 delay-0'
+                        }`}
+                      >
+                        <h3 className="text-[18px] sm:text-[20px] font-bold text-white tracking-tight uppercase mb-2.5">
+                          {sector.title}
+                        </h3>
+                        <p className="text-[14px] sm:text-[15px] leading-relaxed text-white/90">
+                          {sector.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           ))}
         </div>

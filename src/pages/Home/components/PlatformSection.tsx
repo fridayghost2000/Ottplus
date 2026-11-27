@@ -219,7 +219,7 @@ export function PlatformSection() {
         {/* Section Heading */}
         <div className="text-center max-w-[1280px] mx-auto mb-14 lg:mb-20">
           <h2
-            className="text-[34px] sm:text-[46px] lg:text-[56px] leading-[1.15] lg:leading-[70px] tracking-[-1.1px] text-white font-bold"
+            className="text-[34px] sm:text-[46px] lg:text-[56px] leading-[1.15] lg:leading-[70px] tracking-[-1.1px] text-white font-normal"
             style={{ fontFamily: "'Adamina', Georgia, serif" }}
           >
             End-to-end video delivery &amp; monetization platform
